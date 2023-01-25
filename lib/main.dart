@@ -56,10 +56,47 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       drawer: Drawer(
         child: ListView(
-          children: const [
-            DrawerHeader(
-              child: Text("Thingies"),
-            )
+          padding: EdgeInsets.zero,
+          children: [
+            const SizedBox(
+              height: 80,
+              child: DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
+                child: Text(
+                  "Menu",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 21,
+                  ),
+                ),
+              ),
+            ),
+            ListTile(
+              title: const Text(
+                "Full Year Course",
+                style: TextStyle(fontSize: 15),
+              ),
+              onTap: () {},
+              leading: const Icon(Icons.menu_book_rounded),
+            ),
+            ListTile(
+              title: const Text(
+                "Semester Courses",
+                style: TextStyle(fontSize: 15),
+              ),
+              leading: const Icon(Icons.book),
+              onTap: () {},
+            ),
+            ListTile(
+                title: const Text(
+                  "GPA Calculator",
+                  style: TextStyle(fontSize: 15),
+                ),
+                leading: Icon(Icons.calculate_outlined),
+                onTap: () {})
           ],
         ),
       ),
