@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 final listGradeOptions = ["A", "B", "C", "D", "E"];
-
+final courseLevelOptions = ["Regular", "Honors", "AP and G/T"];
 DropdownMenuItem<String> buildMenuItem(String theme) => DropdownMenuItem(
       value: theme,
       child: Text(
