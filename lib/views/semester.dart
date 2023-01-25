@@ -1,59 +1,28 @@
-import 'dart:developer';
+// ignore_for_file: prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:hcgradeapp/constants/routes.dart';
-import 'package:hcgradeapp/views/gpa.dart';
-import 'package:hcgradeapp/views/semester.dart';
 
-import 'constants/const.dart';
+import '../constants/const.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class SemesterCalculator extends StatefulWidget {
+  const SemesterCalculator({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const CourseCalculator(title: 'Course Final Grade Calculator'),
-      routes: {
-        courseCalculatorRoute: (context) => const CourseCalculator(
-              title: "Course Final Grade Calculator",
-            ),
-        semesterCalculatorRoute: (context) => const SemesterCalculator(),
-        gpaCalculatorRoute: (context) => const GPACalculator(),
-      },
-    );
-  }
+  State<SemesterCalculator> createState() => _SemesterCalculatorState();
 }
 
-class CourseCalculator extends StatefulWidget {
-  const CourseCalculator({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<CourseCalculator> createState() => _CourseCalculatorState();
-}
-
-class _CourseCalculatorState extends State<CourseCalculator> {
-  List<String?> quarterValues = ["A", "A", "A", "A", "A", "A"];
+class _SemesterCalculatorState extends State<SemesterCalculator> {
+  List<String?> semesterValues = ["A", "A", "A"];
   String total = "";
-  calCourse() {
-    int quater1 = letterToNum(quarterValues[0]!) * 2;
-    int quater2 = letterToNum(quarterValues[1]!) * 2;
-    int quater3 = letterToNum(quarterValues[2]!) * 2;
-    int quater4 = letterToNum(quarterValues[3]!) * 2;
-    int midterm = letterToNum(quarterValues[4]!) * 1;
-    int finals = letterToNum(quarterValues[5]!) * 1;
-    int preCalc = quater1 + quater2 + quater3 + quater4 + midterm + finals;
-    double ans = preCalc / 10;
+  calSem() {
+    int quater1 = letterToNum(semesterValues[0]!) * 2;
+    int quater2 = letterToNum(semesterValues[1]!) * 2;
+    int midterm = letterToNum(semesterValues[2]!) * 1;
+    int preCalc = quater1 + quater2 + midterm;
+    double ans = preCalc / 5;
     setState(() {
       total = numToLetter(ans);
     });
@@ -61,10 +30,10 @@ class _CourseCalculatorState extends State<CourseCalculator> {
 
   @override
   Widget build(BuildContext context) {
-    calCourse();
+    calSem();
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: const Text("Semester Courses"),
       ),
       drawer: Drawer(
         child: ListView(
@@ -113,7 +82,7 @@ class _CourseCalculatorState extends State<CourseCalculator> {
                   "GPA Calculator",
                   style: TextStyle(fontSize: 15),
                 ),
-                leading: Icon(Icons.calculate_outlined),
+                leading: const Icon(Icons.calculate_outlined),
                 onTap: () {
                   Navigator.of(context).pushNamedAndRemoveUntil(
                       gpaCalculatorRoute, (route) => false);
@@ -124,7 +93,7 @@ class _CourseCalculatorState extends State<CourseCalculator> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: [
             const Text(
               "Course grade is...",
               style: TextStyle(fontSize: 17),
@@ -147,15 +116,16 @@ class _CourseCalculatorState extends State<CourseCalculator> {
                 const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
                 DropdownButton<String>(
                   items: listGradeOptions.map(buildMenuItem).toList(),
-                  value: quarterValues[0],
+                  value: semesterValues[0],
                   onChanged: (String? value) {
                     setState(() {
-                      quarterValues[0] = value;
+                      semesterValues[0] = value;
                     });
                   },
                 )
               ],
             ),
+            const Padding(padding: EdgeInsets.symmetric(vertical: 1)),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -169,12 +139,11 @@ class _CourseCalculatorState extends State<CourseCalculator> {
                 const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
                 DropdownButton<String>(
                   items: listGradeOptions.map(buildMenuItem).toList(),
-                  value: quarterValues[1],
+                  value: semesterValues[1],
                   onChanged: (String? value) {
                     setState(() {
-                      quarterValues[1] = value;
+                      semesterValues[1] = value;
                     });
-                    log(quarterValues.toString());
                   },
                 )
               ],
@@ -192,81 +161,11 @@ class _CourseCalculatorState extends State<CourseCalculator> {
                 const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
                 DropdownButton<String>(
                   items: listGradeOptions.map(buildMenuItem).toList(),
-                  value: quarterValues[4],
+                  value: semesterValues[2],
                   onChanged: (String? value) {
                     setState(() {
-                      quarterValues[4] = value;
+                      semesterValues[2] = value;
                     });
-                    log(quarterValues.toString());
-                  },
-                )
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                const Text(
-                  "Quarter 3",
-                  style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                DropdownButton<String>(
-                  items: listGradeOptions.map(buildMenuItem).toList(),
-                  value: quarterValues[2],
-                  onChanged: (String? value) {
-                    setState(() {
-                      quarterValues[2] = value;
-                    });
-                    log(quarterValues.toString());
-                  },
-                )
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                const Text(
-                  "Quarter 4",
-                  style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                DropdownButton<String>(
-                  items: listGradeOptions.map(buildMenuItem).toList(),
-                  value: quarterValues[3],
-                  onChanged: (String? value) {
-                    setState(() {
-                      quarterValues[3] = value;
-                    });
-                    log(quarterValues.toString());
-                  },
-                )
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                const Text(
-                  "Final",
-                  style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                DropdownButton<String>(
-                  items: listGradeOptions.map(buildMenuItem).toList(),
-                  value: quarterValues[5],
-                  onChanged: (String? value) {
-                    setState(() {
-                      quarterValues[5] = value;
-                    });
-                    log(quarterValues.toString());
                   },
                 )
               ],
@@ -275,9 +174,7 @@ class _CourseCalculatorState extends State<CourseCalculator> {
               width: 100,
               height: 50,
               child: TextButton(
-                onPressed: (() {
-                  calCourse();
-                }),
+                onPressed: (() {}),
                 child: const Text("Calculate"),
               ),
             ),
