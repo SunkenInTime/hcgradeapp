@@ -1,8 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:hcgradeapp/constants/routes.dart';
 
 import '../constants/const.dart';
@@ -170,14 +168,16 @@ class _SemesterCalculatorState extends State<SemesterCalculator> {
                 )
               ],
             ),
-            SizedBox(
-              width: 100,
-              height: 50,
-              child: TextButton(
-                onPressed: (() {}),
-                child: const Text("Calculate"),
-              ),
-            ),
+            // SizedBox(
+            //   width: 100,
+            //   height: 50,
+            //   child: TextButton(
+            //     onPressed: (() {}),
+            //     child: const Text("Calculate"),
+            //   ),
+            // ),
+            const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+            const Text("* All grades calculated using HCPSS Policy 8020.")
           ],
         ),
       ),

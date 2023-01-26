@@ -1,6 +1,6 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import '../constants/const.dart';
 import '../constants/routes.dart';
@@ -23,9 +23,35 @@ class _GPACalculatorState extends State<GPACalculator> {
     "Regular",
     "Regular",
   ];
-  double total = 0;
+  String total = "";
+  List<bool> semesterCheck = [false, false];
+
+  void calcGPA() {
+    double ans = 0;
+    double firstSem = 1;
+    double secSem = 1;
+    for (int i = 0; i < courseValues.length; i++) {
+      ans += letterToNumWeighted(courseValues[i]!, courseLevel[i]!);
+    }
+    // if (semesterCheck[0] == true) {
+    //   firstSem = 0.5;
+    // }
+    // if (semesterCheck[1] == true) {
+    //   secSem = 0.5;
+    // }
+    double length = courseValues.length - 2;
+    length += firstSem;
+    length += secSem;
+    log(length.toString());
+    ans = ans / length;
+    setState(() {
+      total = ans.toStringAsFixed(2);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    calcGPA();
     return Scaffold(
       appBar: AppBar(
         title: const Text("GPA Calculator"),
@@ -77,7 +103,7 @@ class _GPACalculatorState extends State<GPACalculator> {
                   "GPA Calculator",
                   style: TextStyle(fontSize: 15),
                 ),
-                leading: Icon(Icons.calculate_outlined),
+                leading: const Icon(Icons.calculate_outlined),
                 onTap: () {
                   Navigator.of(context).pushNamedAndRemoveUntil(
                       gpaCalculatorRoute, (route) => false);
@@ -281,6 +307,13 @@ class _GPACalculatorState extends State<GPACalculator> {
                     });
                   },
                 ),
+                // Checkbox(
+                //     value: semesterCheck[0],
+                //     onChanged: (e) {
+                //       setState(() {
+                //         semesterCheck[0] = e!;
+                //       });
+                //     })
               ],
             ),
             Row(
@@ -312,8 +345,17 @@ class _GPACalculatorState extends State<GPACalculator> {
                     });
                   },
                 ),
+                // Checkbox(
+                //     value: semesterCheck[1],
+                //     onChanged: (e) {
+                //       setState(() {
+                //         semesterCheck[1] = e!;
+                //       });
+                //     })
               ],
             ),
+            const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+            const Text("* All grades calculated using HCPSS Policy 8020.")
           ],
         ),
       ),

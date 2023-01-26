@@ -6,7 +6,7 @@ DropdownMenuItem<String> buildMenuItem(String theme) => DropdownMenuItem(
       value: theme,
       child: Text(
         theme,
-        style: TextStyle(),
+        style: const TextStyle(),
       ),
     );
 
@@ -16,6 +16,29 @@ int letterToNum(String let) {
   if (let == "C") return 2;
   if (let == "D") return 1;
   if (let == "E") return 0;
+  return 0;
+}
+
+double letterToNumWeighted(String let, String level) {
+  if (level == "AP and G/T") {
+    if (let == "A") return 5;
+    if (let == "B") return 4;
+    if (let == "C") return 3;
+    if (let == "D") return 1;
+    if (let == "E") return 0;
+  } else if (level == "Honors") {
+    if (let == "A") return 4.5;
+    if (let == "B") return 3.5;
+    if (let == "C") return 2.5;
+    if (let == "D") return 1.0;
+    if (let == "E") return 0;
+  } else {
+    if (let == "A") return 4;
+    if (let == "B") return 3;
+    if (let == "C") return 2;
+    if (let == "D") return 1;
+    if (let == "E") return 0;
+  }
   return 0;
 }
 

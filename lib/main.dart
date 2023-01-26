@@ -1,10 +1,8 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:hcgradeapp/constants/routes.dart';
 import 'package:hcgradeapp/views/gpa.dart';
 import 'package:hcgradeapp/views/semester.dart';
-
 import 'constants/const.dart';
 
 void main() {
@@ -21,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const CourseCalculator(title: 'Course Final Grade Calculator'),
+      home: const CourseCalculator(title: 'Full Year Course'),
       routes: {
         courseCalculatorRoute: (context) => const CourseCalculator(
               title: "Course Final Grade Calculator",
@@ -29,6 +27,7 @@ class MyApp extends StatelessWidget {
         semesterCalculatorRoute: (context) => const SemesterCalculator(),
         gpaCalculatorRoute: (context) => const GPACalculator(),
       },
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -113,7 +112,7 @@ class _CourseCalculatorState extends State<CourseCalculator> {
                   "GPA Calculator",
                   style: TextStyle(fontSize: 15),
                 ),
-                leading: Icon(Icons.calculate_outlined),
+                leading: const Icon(Icons.calculate_outlined),
                 onTap: () {
                   Navigator.of(context).pushNamedAndRemoveUntil(
                       gpaCalculatorRoute, (route) => false);
@@ -271,16 +270,18 @@ class _CourseCalculatorState extends State<CourseCalculator> {
                 )
               ],
             ),
-            SizedBox(
-              width: 100,
-              height: 50,
-              child: TextButton(
-                onPressed: (() {
-                  calCourse();
-                }),
-                child: const Text("Calculate"),
-              ),
-            ),
+            // SizedBox(
+            //   width: 100,
+            //   height: 50,
+            //   child: TextButton(
+            //     onPressed: (() {
+            //       calCourse();
+            //     }),
+            //     child: const Text("Calculate"),
+            //   ),
+            // ),
+            const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+            const Text("* All grades calculated using HCPSS Policy 8020.")
           ],
         ),
       ),
