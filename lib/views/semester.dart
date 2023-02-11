@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:hcgradeapp/constants/routes.dart';
 
 import '../constants/const.dart';
 
@@ -33,61 +32,7 @@ class _SemesterCalculatorState extends State<SemesterCalculator> {
       appBar: AppBar(
         title: const Text("Semester Courses"),
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            const SizedBox(
-              height: 80,
-              child: DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                ),
-                child: Text(
-                  "Menu",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 21,
-                  ),
-                ),
-              ),
-            ),
-            ListTile(
-              title: const Text(
-                "Full Year Course",
-                style: TextStyle(fontSize: 15),
-              ),
-              onTap: () {
-                Navigator.of(context)
-                    .pushReplacementNamed(courseCalculatorRoute);
-              },
-              leading: const Icon(Icons.menu_book_rounded),
-            ),
-            ListTile(
-              title: const Text(
-                "Semester Courses",
-                style: TextStyle(fontSize: 15),
-              ),
-              leading: const Icon(Icons.book),
-              onTap: () {
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                    semesterCalculatorRoute, (route) => false);
-              },
-            ),
-            ListTile(
-                title: const Text(
-                  "GPA Calculator",
-                  style: TextStyle(fontSize: 15),
-                ),
-                leading: const Icon(Icons.calculate_outlined),
-                onTap: () {
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                      gpaCalculatorRoute, (route) => false);
-                })
-          ],
-        ),
-      ),
+      drawer: sideDrawer(context),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
