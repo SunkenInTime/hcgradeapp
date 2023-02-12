@@ -20,6 +20,11 @@ class _PercentageCalculatorViewState extends State<PercentageCalculatorView> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          const Text(
+            "A",
+            style: TextStyle(fontSize: 70),
+          ),
+          Padding(padding: EdgeInsets.all(25)),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
@@ -34,7 +39,10 @@ class _PercentageCalculatorViewState extends State<PercentageCalculatorView> {
                           color: Color.fromARGB(255, 167, 167, 167), width: 1),
                     ),
                     border: OutlineInputBorder(),
+                    hintText: "10",
+                    contentPadding: EdgeInsets.all(10.0),
                   ),
+                  keyboardType: TextInputType.number,
                 ),
               ),
               Padding(padding: EdgeInsets.all(10)),
@@ -53,6 +61,8 @@ class _PercentageCalculatorViewState extends State<PercentageCalculatorView> {
                       borderSide: BorderSide(
                           color: Color.fromARGB(255, 167, 167, 167), width: 1),
                     ),
+                    contentPadding: EdgeInsets.all(10.0),
+                    hintText: "10",
                     border: OutlineInputBorder(),
                   ),
                 ),
