@@ -27,20 +27,12 @@ class _GPACalculatorState extends State<GPACalculator> {
 
   void calcGPA() {
     double ans = 0;
-    double firstSem = 1;
-    double secSem = 1;
     for (int i = 0; i < courseValues.length; i++) {
       ans += letterToNumWeighted(courseValues[i]!, courseLevel[i]!);
     }
-    // if (semesterCheck[0] == true) {
-    //   firstSem = 0.5;
-    // }
-    // if (semesterCheck[1] == true) {
-    //   secSem = 0.5;
-    // }
-    double length = courseValues.length - 2;
-    length += firstSem;
-    length += secSem;
+
+    double length = courseValues.length.toDouble();
+
     log(length.toString());
     ans = ans / length;
     setState(() {

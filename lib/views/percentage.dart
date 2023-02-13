@@ -10,6 +10,13 @@ class PercentageCalculatorView extends StatefulWidget {
 }
 
 class _PercentageCalculatorViewState extends State<PercentageCalculatorView> {
+  String percentageValue = "100.00%";
+  String letterGrade = "A";
+  final TextEditingController _givenScoreValueController =
+      TextEditingController();
+  final TextEditingController _totalScoreValueController =
+      TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,43 +27,50 @@ class _PercentageCalculatorViewState extends State<PercentageCalculatorView> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
-            "A",
-            style: TextStyle(fontSize: 70),
+          Text(
+            letterGrade,
+            style: const TextStyle(fontSize: 70),
           ),
-          Padding(padding: EdgeInsets.all(25)),
+          Text(percentageValue),
+          const Padding(padding: EdgeInsets.all(25)),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
+            children: [
               SizedBox(
                 width: 60,
                 height: 50,
                 child: TextField(
+                  controller: _givenScoreValueController,
                   textAlign: TextAlign.center,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                           color: Color.fromARGB(255, 167, 167, 167), width: 1),
                     ),
                     border: OutlineInputBorder(),
-                    hintText: "10",
+                    hintText: "8",
                     contentPadding: EdgeInsets.all(10.0),
                   ),
                   keyboardType: TextInputType.number,
+                  onChanged: (e) {
+                    if (_givenScoreValueController.text.isEmpty) return;
+                    if (!isNumber(_givenScoreValueController.text)) return;
+                  },
                 ),
               ),
-              Padding(padding: EdgeInsets.all(10)),
-              Text(
+              const Padding(padding: EdgeInsets.all(10)),
+              const Text(
                 "/",
                 style: TextStyle(fontSize: 28),
               ),
-              Padding(padding: EdgeInsets.all(10)),
+              const Padding(padding: EdgeInsets.all(10)),
               SizedBox(
                 width: 60,
                 height: 50,
                 child: TextField(
+                  controller: _totalScoreValueController,
                   textAlign: TextAlign.center,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                           color: Color.fromARGB(255, 167, 167, 167), width: 1),
@@ -65,6 +79,7 @@ class _PercentageCalculatorViewState extends State<PercentageCalculatorView> {
                     hintText: "10",
                     border: OutlineInputBorder(),
                   ),
+                  keyboardType: TextInputType.number,
                 ),
               ),
             ],

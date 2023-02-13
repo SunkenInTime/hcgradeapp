@@ -63,7 +63,7 @@ Widget sideDrawer(context) {
       padding: EdgeInsets.zero,
       children: [
         const SizedBox(
-          height: 80,
+          height: 120,
           child: DrawerHeader(
             decoration: BoxDecoration(
               color: Colors.blue,
@@ -122,4 +122,32 @@ Widget sideDrawer(context) {
       ],
     ),
   );
+}
+
+List<String> calculatePercentage(int givenScore, int maxScore) {
+  double percentage = givenScore / maxScore;
+  List<String> percentAndLetter = ["", ""];
+  percentage = percentage.toStringAsFixed(2) as double;
+  percentAndLetter[0] = "$percentage%";
+  percentAndLetter[1] = calculateLetterWithPercent(percentage);
+  return percentAndLetter;
+}
+
+String calculateLetterWithPercent(double percent) {
+  if (percent >= 89.5) {
+    return "A";
+  } else if (percent >= 79.5) {
+    return "B";
+  } else if (percent >= 69.5) {
+    return "C";
+  } else if (percent >= 59.5) {
+    return "D";
+  } else {
+    return "E";
+  }
+}
+
+bool isNumber(String str) {
+  final regex = RegExp(r'^\d+(\.\d+)?$');
+  return regex.hasMatch(str);
 }
