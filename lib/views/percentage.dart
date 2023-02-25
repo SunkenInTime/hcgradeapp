@@ -11,12 +11,15 @@ class PercentageCalculatorView extends StatefulWidget {
 
 class _PercentageCalculatorViewState extends State<PercentageCalculatorView> {
   String percentageValue = "100.00%";
-  String letterGrade = "A";
+  String letterGradeValue = "A";
   final TextEditingController _givenScoreValueController =
       TextEditingController();
   final TextEditingController _totalScoreValueController =
       TextEditingController();
-
+  Color givenGreyOutline = const Color.fromARGB(255, 167, 167, 167);
+  Color givenBlueOutline = Colors.blue;
+  Color totalGreyOutline = const Color.fromARGB(255, 167, 167, 167);
+  Color totalBlueOutline = Colors.blue;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +31,7 @@ class _PercentageCalculatorViewState extends State<PercentageCalculatorView> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            letterGrade,
+            letterGradeValue,
             style: const TextStyle(fontSize: 70),
           ),
           Text(percentageValue),
@@ -42,19 +45,41 @@ class _PercentageCalculatorViewState extends State<PercentageCalculatorView> {
                 child: TextField(
                   controller: _givenScoreValueController,
                   textAlign: TextAlign.center,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: Color.fromARGB(255, 167, 167, 167), width: 1),
+                      borderSide: BorderSide(color: givenGreyOutline, width: 1),
                     ),
-                    border: OutlineInputBorder(),
-                    hintText: "8",
-                    contentPadding: EdgeInsets.all(10.0),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: givenBlueOutline, width: 2)),
+                    contentPadding: const EdgeInsets.all(10.0),
+                    hintText: "10",
+                    border: const OutlineInputBorder(),
                   ),
                   keyboardType: TextInputType.number,
                   onChanged: (e) {
-                    if (_givenScoreValueController.text.isEmpty) return;
-                    if (!isNumber(_givenScoreValueController.text)) return;
+                    if (_givenScoreValueController.text.isEmpty ||
+                        _totalScoreValueController.text.isEmpty) return;
+                    if (!isNumber(_givenScoreValueController.text)) {
+                      setState(() {
+                        givenGreyOutline = Colors.red.shade700;
+                        givenBlueOutline = Colors.red.shade700;
+                      });
+                      return;
+                    }
+                    setState(() {
+                      givenGreyOutline =
+                          const Color.fromARGB(255, 167, 167, 167);
+                      givenBlueOutline = Colors.blue;
+                    });
+                    if (!isNumber(_totalScoreValueController.text)) return;
+                    List<String> letterAndNum = calculatePercentage(
+                        int.parse(_givenScoreValueController.text),
+                        int.parse(_totalScoreValueController.text));
+                    setState(() {
+                      percentageValue = letterAndNum[0];
+                      letterGradeValue = letterAndNum[1];
+                    });
                   },
                 ),
               ),
@@ -70,16 +95,42 @@ class _PercentageCalculatorViewState extends State<PercentageCalculatorView> {
                 child: TextField(
                   controller: _totalScoreValueController,
                   textAlign: TextAlign.center,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: Color.fromARGB(255, 167, 167, 167), width: 1),
+                      borderSide: BorderSide(color: totalGreyOutline, width: 1),
                     ),
-                    contentPadding: EdgeInsets.all(10.0),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: totalBlueOutline, width: 2)),
+                    contentPadding: const EdgeInsets.all(10.0),
                     hintText: "10",
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
                   ),
                   keyboardType: TextInputType.number,
+                  onChanged: (value) {
+                    if (_givenScoreValueController.text.isEmpty ||
+                        _totalScoreValueController.text.isEmpty) return;
+                    if (!isNumber(_totalScoreValueController.text)) {
+                      setState(() {
+                        totalGreyOutline = Colors.red.shade700;
+                        totalBlueOutline = Colors.red.shade700;
+                      });
+                      return;
+                    }
+                    setState(() {
+                      totalGreyOutline =
+                          const Color.fromARGB(255, 167, 167, 167);
+                      totalBlueOutline = Colors.blue;
+                    });
+                    if (!isNumber(_givenScoreValueController.text)) return;
+                    List<String> letterAndNum = calculatePercentage(
+                        int.parse(_givenScoreValueController.text),
+                        int.parse(_totalScoreValueController.text));
+                    setState(() {
+                      percentageValue = letterAndNum[0];
+                      letterGradeValue = letterAndNum[1];
+                    });
+                  },
                 ),
               ),
             ],

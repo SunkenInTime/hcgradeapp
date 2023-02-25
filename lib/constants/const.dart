@@ -126,8 +126,9 @@ Widget sideDrawer(context) {
 
 List<String> calculatePercentage(int givenScore, int maxScore) {
   double percentage = givenScore / maxScore;
+  percentage *= 100;
   List<String> percentAndLetter = ["", ""];
-  percentage = percentage.toStringAsFixed(2) as double;
+  percentage = double.parse(percentage.toStringAsFixed(2));
   percentAndLetter[0] = "$percentage%";
   percentAndLetter[1] = calculateLetterWithPercent(percentage);
   return percentAndLetter;
