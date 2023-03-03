@@ -59,7 +59,12 @@ class _PercentageCalculatorViewState extends State<PercentageCalculatorView> {
                   keyboardType: TextInputType.number,
                   onChanged: (e) {
                     if (_givenScoreValueController.text.isEmpty ||
-                        _totalScoreValueController.text.isEmpty) return;
+                        _totalScoreValueController.text.isEmpty) {
+                      setState(() {
+                        percentageValue = "100.00%";
+                        letterGradeValue = "A";
+                      });
+                    }
                     if (!isNumber(_givenScoreValueController.text)) {
                       setState(() {
                         givenGreyOutline = Colors.red.shade700;
@@ -109,7 +114,12 @@ class _PercentageCalculatorViewState extends State<PercentageCalculatorView> {
                   keyboardType: TextInputType.number,
                   onChanged: (value) {
                     if (_givenScoreValueController.text.isEmpty ||
-                        _totalScoreValueController.text.isEmpty) return;
+                        _totalScoreValueController.text.isEmpty) {
+                      setState(() {
+                        percentageValue = "100.00%";
+                        letterGradeValue = "A";
+                      });
+                    }
                     if (!isNumber(_totalScoreValueController.text)) {
                       setState(() {
                         totalGreyOutline = Colors.red.shade700;
