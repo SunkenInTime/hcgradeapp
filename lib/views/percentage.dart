@@ -79,8 +79,8 @@ class _PercentageCalculatorViewState extends State<PercentageCalculatorView> {
                     });
                     if (!isNumber(_totalScoreValueController.text)) return;
                     List<String> letterAndNum = calculatePercentage(
-                        int.parse(_givenScoreValueController.text),
-                        int.parse(_totalScoreValueController.text));
+                        double.parse(_givenScoreValueController.text),
+                        double.parse(_totalScoreValueController.text));
                     setState(() {
                       percentageValue = letterAndNum[0];
                       letterGradeValue = letterAndNum[1];
@@ -134,8 +134,8 @@ class _PercentageCalculatorViewState extends State<PercentageCalculatorView> {
                     });
                     if (!isNumber(_givenScoreValueController.text)) return;
                     List<String> letterAndNum = calculatePercentage(
-                        int.parse(_givenScoreValueController.text),
-                        int.parse(_totalScoreValueController.text));
+                        double.parse(_givenScoreValueController.text),
+                        double.parse(_totalScoreValueController.text));
                     setState(() {
                       percentageValue = letterAndNum[0];
                       letterGradeValue = letterAndNum[1];

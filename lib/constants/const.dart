@@ -124,7 +124,7 @@ Widget sideDrawer(context) {
   );
 }
 
-List<String> calculatePercentage(int givenScore, int maxScore) {
+List<String> calculatePercentage(double givenScore, double maxScore) {
   double percentage = givenScore / maxScore;
   percentage *= 100;
   List<String> percentAndLetter = ["", ""];
@@ -149,6 +149,8 @@ String calculateLetterWithPercent(double percent) {
 }
 
 bool isNumber(String str) {
-  final regex = RegExp(r'^\d+(\.\d+)?$');
-  return regex.hasMatch(str);
+  if (str == null) {
+    return false;
+  }
+  return double.tryParse(str) != null;
 }
