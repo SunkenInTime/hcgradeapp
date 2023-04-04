@@ -1,6 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:hcgradeapp/providers/gpa_calculator_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../constants/const.dart';
 
@@ -12,37 +12,8 @@ class GPACalculator extends StatefulWidget {
 }
 
 class _GPACalculatorState extends State<GPACalculator> {
-  List<String?> courseValues = ["A", "A", "A", "A", "A", "A", "A"];
-  List<String?> courseLevel = [
-    "Regular",
-    "Regular",
-    "Regular",
-    "Regular",
-    "Regular",
-    "Regular",
-    "Regular",
-  ];
-  String total = "";
-  List<bool> semesterCheck = [false, false];
-
-  void calcGPA() {
-    double ans = 0;
-    for (int i = 0; i < courseValues.length; i++) {
-      ans += letterToNumWeighted(courseValues[i]!, courseLevel[i]!);
-    }
-
-    double length = courseValues.length.toDouble();
-
-    log(length.toString());
-    ans = ans / length;
-    setState(() {
-      total = ans.toStringAsFixed(2);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    calcGPA();
     return Scaffold(
       appBar: AppBar(
         title: const Text("GPA Calculator"),
@@ -57,242 +28,96 @@ class _GPACalculatorState extends State<GPACalculator> {
               style: TextStyle(fontSize: 17),
             ),
             Text(
-              total.toString(),
+              context.watch<GpaProvider>().gpaValue,
               style: const TextStyle(fontSize: 70),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                const Text(
-                  "Course 1",
-                  style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.bold,
+            SizedBox(
+              height: 473.0,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Column(
+                    children: [
+                      ListView.builder(
+                          shrinkWrap: true,
+                          itemCount:
+                              context.watch<GpaProvider>().courseValues.length,
+                          itemBuilder: (context, index) {
+                            final course = context
+                                .watch<GpaProvider>()
+                                .courseValues[index];
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text(
+                                  "Course ${index + 1}",
+                                  style: const TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 10)),
+                                //Letter grade
+                                DropdownButton<String>(
+                                  items: listGradeOptions
+                                      .map(buildMenuItem)
+                                      .toList(),
+                                  value: course.letterGrade,
+                                  onChanged: (String? value) {
+                                    context.read<GpaProvider>().updateCourse(
+                                          index,
+                                          Course(
+                                            letterGrade: value,
+                                            level: course.level,
+                                          ),
+                                        );
+                                  },
+                                ),
+                                DropdownButton<String>(
+                                  items: courseLevelOptions
+                                      .map(buildMenuItem)
+                                      .toList(),
+                                  value: course.level,
+                                  onChanged: (String? value) {
+                                    context.read<GpaProvider>().updateCourse(
+                                          index,
+                                          Course(
+                                            letterGrade: course.letterGrade,
+                                            level: value,
+                                          ),
+                                        );
+                                  },
+                                ),
+                              ],
+                            );
+                          }),
+                    ],
                   ),
-                ),
-                const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                DropdownButton<String>(
-                  items: listGradeOptions.map(buildMenuItem).toList(),
-                  value: courseValues[0],
-                  onChanged: (String? value) {
-                    setState(() {
-                      courseValues[0] = value;
-                    });
-                  },
-                ),
-                DropdownButton<String>(
-                  items: courseLevelOptions.map(buildMenuItem).toList(),
-                  value: courseLevel[0],
-                  onChanged: (String? value) {
-                    setState(() {
-                      courseLevel[0] = value;
-                    });
-                  },
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                const Text(
-                  "Course 2",
-                  style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.bold,
+                  const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          context.read<GpaProvider>().addCourse();
+                        },
+                        icon: const Icon(Icons.add),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          context.read<GpaProvider>().removeCourse();
+                        },
+                        icon: const Icon(Icons.remove),
+                      ),
+                    ],
                   ),
-                ),
-                const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                DropdownButton<String>(
-                  items: listGradeOptions.map(buildMenuItem).toList(),
-                  value: courseValues[1],
-                  onChanged: (String? value) {
-                    setState(() {
-                      courseValues[1] = value;
-                    });
-                  },
-                ),
-                DropdownButton<String>(
-                  items: courseLevelOptions.map(buildMenuItem).toList(),
-                  value: courseLevel[1],
-                  onChanged: (String? value) {
-                    setState(() {
-                      courseLevel[1] = value;
-                    });
-                  },
-                ),
-              ],
+                  const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+                  const Text("* All grades calculated using HCPSS Policy 8020.")
+                ],
+              ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                const Text(
-                  "Course 3",
-                  style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                DropdownButton<String>(
-                  items: listGradeOptions.map(buildMenuItem).toList(),
-                  value: courseValues[2],
-                  onChanged: (String? value) {
-                    setState(() {
-                      courseValues[2] = value;
-                    });
-                  },
-                ),
-                DropdownButton<String>(
-                  items: courseLevelOptions.map(buildMenuItem).toList(),
-                  value: courseLevel[2],
-                  onChanged: (String? value) {
-                    setState(() {
-                      courseLevel[2] = value;
-                    });
-                  },
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                const Text(
-                  "Course 4",
-                  style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                DropdownButton<String>(
-                  items: listGradeOptions.map(buildMenuItem).toList(),
-                  value: courseValues[3],
-                  onChanged: (String? value) {
-                    setState(() {
-                      courseValues[3] = value;
-                    });
-                  },
-                ),
-                DropdownButton<String>(
-                  items: courseLevelOptions.map(buildMenuItem).toList(),
-                  value: courseLevel[3],
-                  onChanged: (String? value) {
-                    setState(() {
-                      courseLevel[3] = value;
-                    });
-                  },
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                const Text(
-                  "Course 5",
-                  style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                DropdownButton<String>(
-                  items: listGradeOptions.map(buildMenuItem).toList(),
-                  value: courseValues[4],
-                  onChanged: (String? value) {
-                    setState(() {
-                      courseValues[4] = value;
-                    });
-                  },
-                ),
-                DropdownButton<String>(
-                  items: courseLevelOptions.map(buildMenuItem).toList(),
-                  value: courseLevel[4],
-                  onChanged: (String? value) {
-                    setState(() {
-                      courseLevel[4] = value;
-                    });
-                  },
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                const Text(
-                  "Course 6",
-                  style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                DropdownButton<String>(
-                  items: listGradeOptions.map(buildMenuItem).toList(),
-                  value: courseValues[5],
-                  onChanged: (String? value) {
-                    setState(() {
-                      courseValues[5] = value;
-                    });
-                  },
-                ),
-                DropdownButton<String>(
-                  items: courseLevelOptions.map(buildMenuItem).toList(),
-                  value: courseLevel[5],
-                  onChanged: (String? value) {
-                    setState(() {
-                      courseLevel[5] = value;
-                    });
-                  },
-                ),
-                // Checkbox(
-                //     value: semesterCheck[0],
-                //     onChanged: (e) {
-                //       setState(() {
-                //         semesterCheck[0] = e!;
-                //       });
-                //     })
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                const Text(
-                  "Course 7",
-                  style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                DropdownButton<String>(
-                  items: listGradeOptions.map(buildMenuItem).toList(),
-                  value: courseValues[6],
-                  onChanged: (String? value) {
-                    setState(() {
-                      courseValues[6] = value;
-                    });
-                  },
-                ),
-                DropdownButton<String>(
-                  items: courseLevelOptions.map(buildMenuItem).toList(),
-                  value: courseLevel[6],
-                  onChanged: (String? value) {
-                    setState(() {
-                      courseLevel[6] = value;
-                    });
-                  },
-                ),
-                // Checkbox(
-                //     value: semesterCheck[1],
-                //     onChanged: (e) {
-                //       setState(() {
-                //         semesterCheck[1] = e!;
-                //       });
-                //     })
-              ],
-            ),
-            const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-            const Text("* All grades calculated using HCPSS Policy 8020.")
           ],
         ),
       ),

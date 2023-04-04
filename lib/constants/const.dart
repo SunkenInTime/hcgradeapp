@@ -156,7 +156,7 @@ bool isNumber(String str) {
 }
 
 class Course {
-  String letterGrade;
-  String level;
+  String? letterGrade;
+  String? level;
   Course({required this.letterGrade, required this.level});
 }

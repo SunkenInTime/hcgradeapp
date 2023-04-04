@@ -1,42 +1,17 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../constants/const.dart';
+import '../providers/full_course_calculator_provider.dart';
 
-class FullYearCourseCalculator extends StatefulWidget {
-  const FullYearCourseCalculator({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<FullYearCourseCalculator> createState() =>
-      _FullYearCourseCalculatorState();
-}
-
-class _FullYearCourseCalculatorState extends State<FullYearCourseCalculator> {
-  List<String?> quarterValues = ["A", "A", "A", "A", "A", "A"];
-  String total = "";
-  calCourse() {
-    int quater1 = letterToNum(quarterValues[0]!) * 2;
-    int quater2 = letterToNum(quarterValues[1]!) * 2;
-    int quater3 = letterToNum(quarterValues[2]!) * 2;
-    int quater4 = letterToNum(quarterValues[3]!) * 2;
-    int midterm = letterToNum(quarterValues[4]!) * 1;
-    int finals = letterToNum(quarterValues[5]!) * 1;
-    int preCalc = quater1 + quater2 + quater3 + quater4 + midterm + finals;
-    double ans = preCalc / 10;
-    setState(() {
-      total = numToLetter(ans);
-    });
-  }
+class FullYearCourseCalculator extends StatelessWidget {
+  const FullYearCourseCalculator({super.key});
 
   @override
   Widget build(BuildContext context) {
-    calCourse();
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: const Text("Full Year Course"),
       ),
       drawer: sideDrawer(context),
       body: Center(
@@ -45,10 +20,11 @@ class _FullYearCourseCalculatorState extends State<FullYearCourseCalculator> {
           children: <Widget>[
             const Text(
               "Course grade is...",
-              style: TextStyle(fontSize: 17, fontFamily: "Uniform"),
+              style: TextStyle(fontSize: 17),
             ),
             Text(
-              total,
+              //Fetches the calculated letter grade
+              context.watch<CourseCalculatorProvider>().letterGrade,
               style: const TextStyle(fontSize: 70),
             ),
             const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
@@ -65,11 +41,13 @@ class _FullYearCourseCalculatorState extends State<FullYearCourseCalculator> {
                 const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
                 DropdownButton<String>(
                   items: listGradeOptions.map(buildMenuItem).toList(),
-                  value: quarterValues[0],
+                  value: context
+                      .watch<CourseCalculatorProvider>()
+                      .quarterValues[0],
                   onChanged: (String? value) {
-                    setState(() {
-                      quarterValues[0] = value;
-                    });
+                    return context
+                        .read<CourseCalculatorProvider>()
+                        .ChangeGrade(0, value);
                   },
                 )
               ],
@@ -87,12 +65,13 @@ class _FullYearCourseCalculatorState extends State<FullYearCourseCalculator> {
                 const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
                 DropdownButton<String>(
                   items: listGradeOptions.map(buildMenuItem).toList(),
-                  value: quarterValues[1],
+                  value: context
+                      .watch<CourseCalculatorProvider>()
+                      .quarterValues[1],
                   onChanged: (String? value) {
-                    setState(() {
-                      quarterValues[1] = value;
-                    });
-                    log(quarterValues.toString());
+                    return context
+                        .read<CourseCalculatorProvider>()
+                        .ChangeGrade(1, value);
                   },
                 )
               ],
@@ -110,12 +89,13 @@ class _FullYearCourseCalculatorState extends State<FullYearCourseCalculator> {
                 const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
                 DropdownButton<String>(
                   items: listGradeOptions.map(buildMenuItem).toList(),
-                  value: quarterValues[4],
+                  value: context
+                      .watch<CourseCalculatorProvider>()
+                      .quarterValues[4],
                   onChanged: (String? value) {
-                    setState(() {
-                      quarterValues[4] = value;
-                    });
-                    log(quarterValues.toString());
+                    return context
+                        .read<CourseCalculatorProvider>()
+                        .ChangeGrade(4, value);
                   },
                 )
               ],
@@ -133,12 +113,13 @@ class _FullYearCourseCalculatorState extends State<FullYearCourseCalculator> {
                 const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
                 DropdownButton<String>(
                   items: listGradeOptions.map(buildMenuItem).toList(),
-                  value: quarterValues[2],
+                  value: context
+                      .watch<CourseCalculatorProvider>()
+                      .quarterValues[2],
                   onChanged: (String? value) {
-                    setState(() {
-                      quarterValues[2] = value;
-                    });
-                    log(quarterValues.toString());
+                    return context
+                        .read<CourseCalculatorProvider>()
+                        .ChangeGrade(2, value);
                   },
                 )
               ],
@@ -156,12 +137,13 @@ class _FullYearCourseCalculatorState extends State<FullYearCourseCalculator> {
                 const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
                 DropdownButton<String>(
                   items: listGradeOptions.map(buildMenuItem).toList(),
-                  value: quarterValues[3],
+                  value: context
+                      .watch<CourseCalculatorProvider>()
+                      .quarterValues[3],
                   onChanged: (String? value) {
-                    setState(() {
-                      quarterValues[3] = value;
-                    });
-                    log(quarterValues.toString());
+                    return context
+                        .read<CourseCalculatorProvider>()
+                        .ChangeGrade(3, value);
                   },
                 )
               ],
@@ -179,12 +161,13 @@ class _FullYearCourseCalculatorState extends State<FullYearCourseCalculator> {
                 const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
                 DropdownButton<String>(
                   items: listGradeOptions.map(buildMenuItem).toList(),
-                  value: quarterValues[5],
+                  value: context
+                      .watch<CourseCalculatorProvider>()
+                      .quarterValues[5],
                   onChanged: (String? value) {
-                    setState(() {
-                      quarterValues[5] = value;
-                    });
-                    log(quarterValues.toString());
+                    return context
+                        .read<CourseCalculatorProvider>()
+                        .ChangeGrade(5, value);
                   },
                 )
               ],
