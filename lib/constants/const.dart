@@ -154,3 +154,9 @@ bool isNumber(String str) {
   }
   return double.tryParse(str) != null;
 }
+
+class Course {
+  String letterGrade;
+  String level;
+  Course({required this.letterGrade, required this.level});
+}
