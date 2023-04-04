@@ -1,33 +1,16 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../constants/const.dart';
+import '../providers/semester_course_calculator_provider.dart';
 
-class SemesterCalculator extends StatefulWidget {
+class SemesterCalculator extends StatelessWidget {
   const SemesterCalculator({super.key});
 
   @override
-  State<SemesterCalculator> createState() => _SemesterCalculatorState();
-}
-
-class _SemesterCalculatorState extends State<SemesterCalculator> {
-  List<String?> semesterValues = ["A", "A", "A"];
-  String total = "";
-  calSem() {
-    int quater1 = letterToNum(semesterValues[0]!) * 2;
-    int quater2 = letterToNum(semesterValues[1]!) * 2;
-    int midterm = letterToNum(semesterValues[2]!) * 1;
-    int preCalc = quater1 + quater2 + midterm;
-    double ans = preCalc / 5;
-    setState(() {
-      total = numToLetter(ans);
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    calSem();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Semester Courses"),
@@ -42,7 +25,7 @@ class _SemesterCalculatorState extends State<SemesterCalculator> {
               style: TextStyle(fontSize: 17),
             ),
             Text(
-              total,
+              context.watch<SemesterCourseProvider>().letterGrade,
               style: const TextStyle(fontSize: 70),
             ),
             const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
@@ -59,11 +42,12 @@ class _SemesterCalculatorState extends State<SemesterCalculator> {
                 const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
                 DropdownButton<String>(
                   items: listGradeOptions.map(buildMenuItem).toList(),
-                  value: semesterValues[0],
+                  value:
+                      context.watch<SemesterCourseProvider>().semesterValues[0],
                   onChanged: (String? value) {
-                    setState(() {
-                      semesterValues[0] = value;
-                    });
+                    context
+                        .read<SemesterCourseProvider>()
+                        .ChangeGrade(0, value);
                   },
                 )
               ],
@@ -82,11 +66,12 @@ class _SemesterCalculatorState extends State<SemesterCalculator> {
                 const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
                 DropdownButton<String>(
                   items: listGradeOptions.map(buildMenuItem).toList(),
-                  value: semesterValues[1],
+                  value:
+                      context.watch<SemesterCourseProvider>().semesterValues[1],
                   onChanged: (String? value) {
-                    setState(() {
-                      semesterValues[1] = value;
-                    });
+                    context
+                        .read<SemesterCourseProvider>()
+                        .ChangeGrade(1, value);
                   },
                 )
               ],
@@ -104,11 +89,12 @@ class _SemesterCalculatorState extends State<SemesterCalculator> {
                 const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
                 DropdownButton<String>(
                   items: listGradeOptions.map(buildMenuItem).toList(),
-                  value: semesterValues[2],
+                  value:
+                      context.watch<SemesterCourseProvider>().semesterValues[2],
                   onChanged: (String? value) {
-                    setState(() {
-                      semesterValues[2] = value;
-                    });
+                    context
+                        .read<SemesterCourseProvider>()
+                        .ChangeGrade(2, value);
                   },
                 )
               ],

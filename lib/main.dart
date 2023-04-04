@@ -1,8 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:hcgradeapp/constants/routes.dart';
-import 'package:hcgradeapp/providers/course_calculator_provider.dart';
+import 'package:hcgradeapp/providers/full_course_calculator_provider.dart';
+import 'package:hcgradeapp/providers/semester_course_calculator_provider.dart';
 import 'package:hcgradeapp/views/gpa.dart';
 import 'package:hcgradeapp/views/percentage.dart';
 import 'package:hcgradeapp/views/semester.dart';
@@ -12,7 +11,8 @@ import 'constants/const.dart';
 void main() {
   runApp(MultiProvider(
     providers: [
-      ChangeNotifierProvider(create: (_) => CourseCalculatorProvider())
+      ChangeNotifierProvider(create: (_) => CourseCalculatorProvider()),
+      ChangeNotifierProvider(create: (_) => SemesterCourseProvider()),
     ],
     child: const MyApp(),
   ));
@@ -207,10 +207,6 @@ class CourseCalculator extends StatelessWidget {
                     return context
                         .read<CourseCalculatorProvider>()
                         .ChangeGrade(5, value);
-                    log(context
-                        .watch<CourseCalculatorProvider>()
-                        .quarterValues
-                        .toString());
                   },
                 )
               ],

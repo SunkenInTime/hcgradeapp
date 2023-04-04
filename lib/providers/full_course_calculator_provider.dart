@@ -16,8 +16,8 @@ class CourseCalculatorProvider with ChangeNotifier {
     int quater4 = letterToNum(_quarterValues[3]!) * 2;
     int midterm = letterToNum(_quarterValues[4]!) * 1;
     int finals = letterToNum(_quarterValues[5]!) * 1;
-    int preCalc = quater1 + quater2 + quater3 + quater4 + midterm + finals;
-    double ans = preCalc / 10;
+    int calc = quater1 + quater2 + quater3 + quater4 + midterm + finals;
+    double ans = calc / 10;
     _letterGrade = numToLetter(ans);
     notifyListeners();
   }
