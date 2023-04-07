@@ -172,6 +172,13 @@ String indexToCourseName(int value) {
   return "Final";
 }
 
+String indexToSemesterName(int value) {
+  if (value <= 1) {
+    return "Quarter ${value + 1}";
+  }
+  return "Final";
+}
+
 Widget greyLineBreak() {
   return const Divider(
     height: 1,

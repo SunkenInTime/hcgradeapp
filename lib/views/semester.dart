@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../constants/const.dart';
+import '../constants/icons.dart';
 import '../providers/semester_course_calculator_provider.dart';
+import '../themes/theme_const.dart';
 
 class SemesterCalculator extends StatelessWidget {
   const SemesterCalculator({super.key});
@@ -17,101 +19,157 @@ class SemesterCalculator extends StatelessWidget {
         leading: drawerIcon(),
       ),
       drawer: sideDrawer(context),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              "Course grade is...",
-              style: TextStyle(fontSize: 17),
-            ),
-            Text(
-              context.watch<SemesterCourseProvider>().letterGrade,
-              style: const TextStyle(fontSize: 70),
-            ),
-            const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+      body: Column(
+        // mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  "Quarter 1",
-                  style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.bold,
-                  ),
+                Column(
+                  children: [
+                    const Text(
+                      "Your grade",
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                    ),
+                    Text(
+                      //Fetches the calculated letter grade
+                      context.watch<SemesterCourseProvider>().letterGrade,
+                      style: const TextStyle(fontSize: 60),
+                    ),
+                  ],
                 ),
-                const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                DropdownButton<String>(
-                  items: listGradeOptions.map(buildMenuItem).toList(),
-                  value:
-                      context.watch<SemesterCourseProvider>().semesterValues[0],
-                  onChanged: (String? value) {
-                    context
-                        .read<SemesterCourseProvider>()
-                        .ChangeGrade(0, value);
-                  },
-                )
+                // const Padding(
+                //   padding: EdgeInsets.symmetric(horizontal: 50),
+                // ),
+                const Text(
+                  "*All grades are calculated\n using HCPSS Policy 8020.",
+                  style: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.5)),
+                ),
               ],
             ),
-            const Padding(padding: EdgeInsets.symmetric(vertical: 1)),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                const Text(
-                  "Quarter 2",
+          ),
+          greyLineBreak(),
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount:
+                context.watch<SemesterCourseProvider>().semesterValues.length,
+            itemBuilder: (context, index) {
+              return Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 14),
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.only(top: 8.0, left: 14, right: 14),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            indexToSemesterName(index),
+                            style: const TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          // const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+                          Container(
+                            height: 42,
+                            width: 75,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(4),
+                              border: Border.all(color: Colors.black),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: DropdownButtonHideUnderline(
+                                child: DropdownButton<String>(
+                                  icon: const Icon(
+                                    CustomIcons.caretdownicon,
+                                    size: 16,
+                                    color: Colors.black,
+                                  ),
+                                  isExpanded: true,
+                                  items: listGradeOptions.map((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                                  value: context
+                                      .watch<SemesterCourseProvider>()
+                                      .semesterValues[index],
+                                  onChanged: (String? value) {
+                                    return context
+                                        .read<SemesterCourseProvider>()
+                                        .ChangeGrade(index, value);
+                                  },
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w600,
+                                  ), // Set the font size and color here
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  greyLineBreak(),
+                ],
+              );
+            },
+          ),
+          const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            SizedBox(
+              height: 49,
+              width: 178,
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: const Color(0xFFADADAD),
+                ),
+                onPressed: () {
+                  context.read<SemesterCourseProvider>().resetGrade();
+                },
+                child: const Text(
+                  "Reset",
                   style: TextStyle(
+                    color: Colors.white,
                     fontSize: 17,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
-                const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                DropdownButton<String>(
-                  items: listGradeOptions.map(buildMenuItem).toList(),
-                  value:
-                      context.watch<SemesterCourseProvider>().semesterValues[1],
-                  onChanged: (String? value) {
-                    context
-                        .read<SemesterCourseProvider>()
-                        .ChangeGrade(1, value);
-                  },
-                )
-              ],
+              ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                const Text(
-                  "Midterm",
+            const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+            SizedBox(
+              height: 49,
+              width: 178,
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: mainColor,
+                ),
+                onPressed: () {
+                  context.read<SemesterCourseProvider>().CalculateGrade();
+                },
+                child: const Text(
+                  "Calculate",
                   style: TextStyle(
+                    color: Colors.white,
                     fontSize: 17,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
-                const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                DropdownButton<String>(
-                  items: listGradeOptions.map(buildMenuItem).toList(),
-                  value:
-                      context.watch<SemesterCourseProvider>().semesterValues[2],
-                  onChanged: (String? value) {
-                    context
-                        .read<SemesterCourseProvider>()
-                        .ChangeGrade(2, value);
-                  },
-                )
-              ],
+              ),
             ),
-            // SizedBox(
-            //   width: 100,
-            //   height: 50,
-            //   child: TextButton(
-            //     onPressed: (() {}),
-            //     child: const Text("Calculate"),
-            //   ),
-            // ),
-            const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-            const Text("* All grades calculated using HCPSS Policy 8020.")
-          ],
-        ),
+          ])
+        ],
       ),
     );
   }

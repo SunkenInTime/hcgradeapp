@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../constants/const.dart';
 
 class SemesterCourseProvider with ChangeNotifier {
-  final List<String?> _semesterValues = ["A", "A", "A"];
+  List<String?> _semesterValues = ["A", "A", "A"];
   String _letterGrade = "A";
 
   List<String?> get semesterValues => _semesterValues;
@@ -19,9 +19,14 @@ class SemesterCourseProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void resetGrade() {
+    _semesterValues = ["A", "A", "A"];
+    CalculateGrade();
+  }
+
   void ChangeGrade(int index, String? value) {
     _semesterValues[index] = value;
-    CalculateGrade();
+
     notifyListeners();
   }
 }
