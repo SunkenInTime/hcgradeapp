@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hcgradeapp/constants/routes.dart';
 
+import 'icons.dart';
+
 final listGradeOptions = ["A", "B", "C", "D", "E"];
 final courseLevelOptions = ["Regular", "Honors", "AP and G/T"];
 DropdownMenuItem<String> buildMenuItem(String theme) => DropdownMenuItem(
@@ -159,4 +161,32 @@ class Course {
   String? letterGrade;
   String? level;
   Course({required this.letterGrade, required this.level});
+}
+
+String indexToCourseName(int value) {
+  if (value <= 3) {
+    return "Quarter ${value + 1}";
+  } else if (value == 4) {
+    return "Midterm";
+  }
+  return "Final";
+}
+
+Widget greyLineBreak() {
+  return const Divider(
+    height: 1,
+    color: Color.fromRGBO(0, 0, 0, 0.116),
+    thickness: 1,
+    indent: 10,
+    endIndent: 10,
+  );
+}
+
+Widget drawerIcon() {
+  return Builder(
+    builder: (context) => IconButton(
+      onPressed: () => Scaffold.of(context).openDrawer(),
+      icon: const Icon(CustomIcons.menusquare),
+    ),
+  );
 }

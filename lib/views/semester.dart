@@ -14,6 +14,7 @@ class SemesterCalculator extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Semester Courses"),
+        leading: drawerIcon(),
       ),
       drawer: sideDrawer(context),
       body: Center(
