@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hcgradeapp/constants/routes.dart';
+import 'package:hcgradeapp/themes/theme_const.dart';
 
 import 'icons.dart';
 
@@ -61,66 +61,42 @@ String numToLetter(double calc) {
 
 Widget sideDrawer(context) {
   return Drawer(
+    backgroundColor: mainColor,
     child: ListView(
       padding: EdgeInsets.zero,
       children: [
-        const SizedBox(
-          height: 120,
+        SizedBox(
+          height: 80,
           child: DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.blue,
+            decoration: const BoxDecoration(
+              color: Colors.black,
             ),
-            child: Text(
-              "Menu",
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 21,
-              ),
+            child: Row(
+              children: const [
+                Padding(padding: EdgeInsets.symmetric(horizontal: 5)),
+                Icon(
+                  CustomIcons.menusquare,
+                  color: Colors.white,
+                ),
+                Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+                Text(
+                  "Menu",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.normal,
+                    fontFamily: "SF Pro Text",
+                    fontSize: 19,
+                  ),
+                ),
+              ],
             ),
           ),
         ),
-        ListTile(
-          title: const Text(
-            "Full Year Course",
-            style: TextStyle(fontSize: 15),
-          ),
-          onTap: () {
-            Navigator.of(context).pushReplacementNamed(courseCalculatorRoute);
-          },
-          leading: const Icon(Icons.menu_book_rounded),
-        ),
-        ListTile(
-          title: const Text(
-            "Semester Courses",
-            style: TextStyle(fontSize: 15),
-          ),
-          leading: const Icon(Icons.book),
-          onTap: () {
-            Navigator.of(context).pushNamedAndRemoveUntil(
-                semesterCalculatorRoute, (route) => false);
-          },
-        ),
-        ListTile(
-            title: const Text(
-              "GPA Calculator",
-              style: TextStyle(fontSize: 15),
-            ),
-            leading: const Icon(Icons.calculate_outlined),
-            onTap: () {
-              Navigator.of(context).pushNamedAndRemoveUntil(
-                  gpaCalculatorRoute, (route) => false);
-            }),
-        ListTile(
-            title: const Text(
-              "Percentage Calculator",
-              style: TextStyle(fontSize: 15),
-            ),
-            leading: const Icon(Icons.percent_rounded),
-            onTap: () {
-              Navigator.of(context).pushNamedAndRemoveUntil(
-                  percentageCalculatorRoute, (route) => false);
-            }),
+        const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+        const Text(
+          "Coming Soon",
+          style: TextStyle(color: Colors.white),
+        )
       ],
     ),
   );
@@ -186,6 +162,14 @@ Widget greyLineBreak() {
     thickness: 1,
     indent: 10,
     endIndent: 10,
+  );
+}
+
+Widget blackLineBreak() {
+  return const Divider(
+    height: 1,
+    color: Colors.black,
+    thickness: 1,
   );
 }
 

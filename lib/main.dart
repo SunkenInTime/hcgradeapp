@@ -121,7 +121,7 @@ class BottomNavBar extends StatelessWidget {
       ),
       navBarStyle:
           NavBarStyle.style9, // Choose the nav bar style with this property.
-      navBarHeight: 60,
+      navBarHeight: 65,
     );
   }
 }

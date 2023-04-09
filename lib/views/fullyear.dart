@@ -15,6 +15,8 @@ class FullYearCourseCalculator extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Full Year Course"),
         leading: drawerIcon(),
+        centerTitle: true,
+        toolbarHeight: 70,
       ),
       drawer: sideDrawer(context),
       body: Column(
