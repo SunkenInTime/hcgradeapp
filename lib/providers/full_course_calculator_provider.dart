@@ -3,11 +3,17 @@ import 'package:flutter/material.dart';
 import '../constants/const.dart';
 
 class CourseCalculatorProvider with ChangeNotifier {
-  final List<String?> _quarterValues = ["A", "A", "A", "A", "A", "A"];
+  List<String?> _quarterValues = ["A", "A", "A", "A", "A", "A"];
   String _letterGrade = "A";
 
   String get letterGrade => _letterGrade;
   List<String?> get quarterValues => _quarterValues;
+
+  void resetGrade() {
+    _quarterValues = ["A", "A", "A", "A", "A", "A"];
+    CalculateGrade();
+    notifyListeners();
+  }
 
   void CalculateGrade() {
     int quater1 = letterToNum(_quarterValues[0]!) * 2;
@@ -24,7 +30,7 @@ class CourseCalculatorProvider with ChangeNotifier {
 
   void ChangeGrade(int index, String? value) {
     _quarterValues[index] = value;
-    CalculateGrade();
+    // CalculateGrade();
     notifyListeners();
   }
 }

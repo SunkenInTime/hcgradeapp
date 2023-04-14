@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../constants/const.dart';
 
 class GpaProvider with ChangeNotifier {
-  final List<Course> _courseValues = [
+  List<Course> _courseValues = [
     Course(letterGrade: "A", level: "Regular"),
     Course(letterGrade: "A", level: "Regular"),
     Course(letterGrade: "A", level: "Regular"),
@@ -17,22 +17,35 @@ class GpaProvider with ChangeNotifier {
   String _gpaValue = "4.00";
   List<Course> get courseValues => _courseValues;
   String get gpaValue => _gpaValue;
-  void removeCourse() {
+  void removeCourse(int index) {
     if (courseValues.length <= 1) return;
-    _courseValues.removeLast();
+    _courseValues.removeAt(index);
     calculateGPA();
     notifyListeners();
   }
 
+  void resetGPA() {
+    _courseValues = [
+      Course(letterGrade: "A", level: "Regular"),
+      Course(letterGrade: "A", level: "Regular"),
+      Course(letterGrade: "A", level: "Regular"),
+      Course(letterGrade: "A", level: "Regular"),
+      Course(letterGrade: "A", level: "Regular"),
+      Course(letterGrade: "A", level: "Regular"),
+      Course(letterGrade: "A", level: "Regular"),
+    ];
+    calculateGPA();
+  }
+
   void addCourse() {
     _courseValues.add(Course(letterGrade: "A", level: "Regular"));
-    calculateGPA();
+
     notifyListeners();
   }
 
   void updateCourse(int index, Course newCourse) {
     _courseValues[index] = newCourse;
-    calculateGPA();
+
     notifyListeners();
   }
 
