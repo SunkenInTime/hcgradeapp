@@ -66,7 +66,7 @@ Widget sideDrawer(context) {
       padding: EdgeInsets.zero,
       children: [
         SizedBox(
-          height: 80,
+          height: 120,
           child: DrawerHeader(
             decoration: const BoxDecoration(
               color: Colors.black,

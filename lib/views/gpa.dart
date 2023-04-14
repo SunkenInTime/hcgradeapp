@@ -63,42 +63,42 @@ class _GPACalculatorState extends State<GPACalculator> {
           SizedBox(
             height: 501,
             // width: 413,
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15, top: 15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: 39,
-                          width: 169,
-                          child: TextButton.icon(
-                            style: TextButton.styleFrom(
-                              backgroundColor: mainColor,
-                            ),
-                            onPressed: () {
-                              context.read<GpaProvider>().addCourse();
-                            },
-                            icon: const Icon(
-                              Icons.add,
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 15, top: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 39,
+                        width: 169,
+                        child: TextButton.icon(
+                          style: TextButton.styleFrom(
+                            backgroundColor: mainColor,
+                          ),
+                          onPressed: () {
+                            context.read<GpaProvider>().addCourse();
+                          },
+                          icon: const Icon(
+                            Icons.add,
+                            color: Colors.white,
+                          ),
+                          label: const Text(
+                            "Add Course",
+                            style: TextStyle(
                               color: Colors.white,
-                            ),
-                            label: const Text(
-                              "Add Course",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 17,
-                                fontWeight: FontWeight.w500,
-                              ),
+                              fontSize: 17,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  ListView.builder(
+                ),
+                Flexible(
+                  child: ListView.builder(
                       shrinkWrap: true,
                       itemCount:
                           context.watch<GpaProvider>().courseValues.length,
@@ -255,11 +255,11 @@ class _GPACalculatorState extends State<GPACalculator> {
                           ],
                         );
                       }),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-          const Padding(padding: EdgeInsets.symmetric(vertical: 15)),
+          const Padding(padding: EdgeInsets.symmetric(vertical: 7)),
           Align(
             alignment: Alignment.bottomCenter,
             child: SizedBox(

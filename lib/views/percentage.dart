@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hcgradeapp/constants/const.dart';
 
+import '../themes/theme_const.dart';
+
 class PercentageCalculatorView extends StatefulWidget {
   const PercentageCalculatorView({super.key});
 
@@ -23,6 +25,7 @@ class _PercentageCalculatorViewState extends State<PercentageCalculatorView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         title: const Text("Percentage Calculator"),
         leading: drawerIcon(),
@@ -31,7 +34,7 @@ class _PercentageCalculatorViewState extends State<PercentageCalculatorView> {
       ),
       drawer: sideDrawer(context),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
             letterGradeValue,
@@ -60,35 +63,7 @@ class _PercentageCalculatorViewState extends State<PercentageCalculatorView> {
                     border: const OutlineInputBorder(),
                   ),
                   keyboardType: TextInputType.number,
-                  onChanged: (e) {
-                    if (_givenScoreValueController.text.isEmpty ||
-                        _totalScoreValueController.text.isEmpty) {
-                      setState(() {
-                        percentageValue = "100.00%";
-                        letterGradeValue = "A";
-                      });
-                    }
-                    if (!isNumber(_givenScoreValueController.text)) {
-                      setState(() {
-                        givenGreyOutline = Colors.red.shade700;
-                        givenBlueOutline = Colors.red.shade700;
-                      });
-                      return;
-                    }
-                    setState(() {
-                      givenGreyOutline =
-                          const Color.fromARGB(255, 167, 167, 167);
-                      givenBlueOutline = Colors.blue;
-                    });
-                    if (!isNumber(_totalScoreValueController.text)) return;
-                    List<String> letterAndNum = calculatePercentage(
-                        double.parse(_givenScoreValueController.text),
-                        double.parse(_totalScoreValueController.text));
-                    setState(() {
-                      percentageValue = letterAndNum[0];
-                      letterGradeValue = letterAndNum[1];
-                    });
-                  },
+                  onChanged: (e) {},
                 ),
               ),
               const Padding(padding: EdgeInsets.all(10)),
@@ -115,38 +90,100 @@ class _PercentageCalculatorViewState extends State<PercentageCalculatorView> {
                     border: const OutlineInputBorder(),
                   ),
                   keyboardType: TextInputType.number,
-                  onChanged: (value) {
-                    if (_givenScoreValueController.text.isEmpty ||
-                        _totalScoreValueController.text.isEmpty) {
-                      setState(() {
-                        percentageValue = "100.00%";
-                        letterGradeValue = "A";
-                      });
-                    }
-                    if (!isNumber(_totalScoreValueController.text)) {
-                      setState(() {
-                        totalGreyOutline = Colors.red.shade700;
-                        totalBlueOutline = Colors.red.shade700;
-                      });
-                      return;
-                    }
-                    setState(() {
-                      totalGreyOutline =
-                          const Color.fromARGB(255, 167, 167, 167);
-                      totalBlueOutline = Colors.blue;
-                    });
-                    if (!isNumber(_givenScoreValueController.text)) return;
-                    List<String> letterAndNum = calculatePercentage(
-                        double.parse(_givenScoreValueController.text),
-                        double.parse(_totalScoreValueController.text));
-                    setState(() {
-                      percentageValue = letterAndNum[0];
-                      letterGradeValue = letterAndNum[1];
-                    });
-                  },
+                  onChanged: (value) {},
                 ),
               ),
             ],
+          ),
+          const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: SizedBox(
+              child:
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                SizedBox(
+                  height: 49,
+                  width: 178,
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: const Color(0xFFADADAD),
+                    ),
+                    onPressed: () {
+                      _givenScoreValueController.text = "";
+                      _totalScoreValueController.text = "";
+                    },
+                    child: const Text(
+                      "Reset",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 17,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ),
+                const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+                SizedBox(
+                  height: 49,
+                  width: 178,
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: mainColor,
+                    ),
+                    onPressed: () {
+                      if (_givenScoreValueController.text.isEmpty ||
+                          _totalScoreValueController.text.isEmpty) {
+                        setState(() {
+                          percentageValue = "100.00%";
+                          letterGradeValue = "A";
+                        });
+                      }
+
+                      if (!isNumber(_givenScoreValueController.text)) {
+                        setState(() {
+                          givenGreyOutline = Colors.red.shade700;
+                          givenBlueOutline = Colors.red.shade700;
+                        });
+                        return;
+                      } else if (!isNumber(_totalScoreValueController.text)) {
+                        setState(() {
+                          totalGreyOutline = Colors.red.shade700;
+                          totalBlueOutline = Colors.red.shade700;
+                        });
+                        return;
+                      }
+                      setState(() {
+                        totalGreyOutline =
+                            const Color.fromARGB(255, 167, 167, 167);
+                        totalBlueOutline = Colors.blue;
+                      });
+                      setState(() {
+                        givenGreyOutline =
+                            const Color.fromARGB(255, 167, 167, 167);
+                        givenBlueOutline = Colors.blue;
+                      });
+                      if (!isNumber(_totalScoreValueController.text)) return;
+                      setState(() {
+                        letterGradeValue = calculatePercentage(
+                            double.parse(_givenScoreValueController.text),
+                            double.parse(_totalScoreValueController.text))[1];
+                        percentageValue = calculatePercentage(
+                            double.parse(_givenScoreValueController.text),
+                            double.parse(_totalScoreValueController.text))[0];
+                      });
+                    },
+                    child: const Text(
+                      "Calculate",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 17,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ),
+              ]),
+            ),
           )
         ],
       ),
