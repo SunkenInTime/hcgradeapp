@@ -61,7 +61,7 @@ class _GPACalculatorState extends State<GPACalculator> {
           ),
           greyLineBreak(),
           SizedBox(
-            height: 501,
+            height: MediaQuery.of(context).size.height * 0.55,
             // width: 413,
             child: Column(
               children: [
