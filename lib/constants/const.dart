@@ -165,6 +165,16 @@ Widget greyLineBreak() {
   );
 }
 
+Widget fullgreyLineBreak() {
+  return const Divider(
+    height: 1,
+    color: Color.fromRGBO(0, 0, 0, 0.116),
+    thickness: 1,
+    // indent: 20,
+    // endIndent: 20,
+  );
+}
+
 Widget blackLineBreak() {
   return const Divider(
     height: 1,
