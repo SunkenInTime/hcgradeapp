@@ -129,7 +129,7 @@ class FullYearCourseCalculator extends StatelessWidget {
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             SizedBox(
               height: 49,
-              width: 178,
+              width: MediaQuery.of(context).size.width * 0.42,
               child: TextButton(
                 style: TextButton.styleFrom(
                   backgroundColor: const Color(0xFFADADAD),
@@ -150,7 +150,7 @@ class FullYearCourseCalculator extends StatelessWidget {
             const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
             SizedBox(
               height: 49,
-              width: 178,
+              width: MediaQuery.of(context).size.width * 0.42,
               child: TextButton(
                 style: TextButton.styleFrom(
                   backgroundColor: mainColor,

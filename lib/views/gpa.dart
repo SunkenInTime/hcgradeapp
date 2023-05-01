@@ -15,6 +15,12 @@ class GPACalculator extends StatefulWidget {
 
 class _GPACalculatorState extends State<GPACalculator> {
   @override
+  void dispose() {
+    GpaProvider().dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -59,14 +65,14 @@ class _GPACalculatorState extends State<GPACalculator> {
               ],
             ),
           ),
-          greyLineBreak(),
+          // greyLineBreak(),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.55,
+            height: MediaQuery.of(context).size.height * 0.52,
             // width: 413,
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 15, top: 15),
+                  padding: const EdgeInsets.only(left: 15, top: 5, bottom: 5),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -126,11 +132,12 @@ class _GPACalculatorState extends State<GPACalculator> {
                                   ),
                                   //Letter grade
                                   SizedBox(
-                                    width: 240,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.59,
                                     height: 42,
                                     child: Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                          MainAxisAlignment.spaceEvenly,
                                       children: [
                                         Container(
                                           height: 42,
@@ -182,7 +189,10 @@ class _GPACalculatorState extends State<GPACalculator> {
                                         ),
                                         Container(
                                           height: 42,
-                                          width: 124,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.32,
                                           decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(4),
@@ -267,7 +277,7 @@ class _GPACalculatorState extends State<GPACalculator> {
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 SizedBox(
                   height: 49,
-                  width: 178,
+                  width: MediaQuery.of(context).size.width * 0.42,
                   child: TextButton(
                     style: TextButton.styleFrom(
                       backgroundColor: const Color(0xFFADADAD),
@@ -288,7 +298,7 @@ class _GPACalculatorState extends State<GPACalculator> {
                 const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
                 SizedBox(
                   height: 49,
-                  width: 178,
+                  width: MediaQuery.of(context).size.width * 0.42,
                   child: TextButton(
                     style: TextButton.styleFrom(
                       backgroundColor: mainColor,

@@ -160,8 +160,8 @@ Widget greyLineBreak() {
     height: 1,
     color: Color.fromRGBO(0, 0, 0, 0.116),
     thickness: 1,
-    indent: 10,
-    endIndent: 10,
+    indent: 20,
+    endIndent: 20,
   );
 }
 
@@ -170,6 +170,8 @@ Widget blackLineBreak() {
     height: 1,
     color: Colors.black,
     thickness: 1,
+    indent: 20,
+    endIndent: 20,
   );
 }
 
