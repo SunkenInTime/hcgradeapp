@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../constants/const.dart';
 
 class GpaProvider with ChangeNotifier {
+  bool editMode = false;
   List<Course> _courseValues = [
     Course(letterGrade: "A", level: "Regular"),
     Course(letterGrade: "A", level: "Regular"),
@@ -59,6 +60,16 @@ class GpaProvider with ChangeNotifier {
     ans = ans / length;
 
     _gpaValue = ans.toStringAsFixed(2);
+    notifyListeners();
+  }
+
+  void toggleMode() {
+    if (editMode) {
+      editMode = false;
+    } else {
+      editMode = true;
+    }
+    log(editMode.toString());
     notifyListeners();
   }
 }

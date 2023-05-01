@@ -28,6 +28,16 @@ class _GPACalculatorState extends State<GPACalculator> {
         leading: drawerIcon(),
         centerTitle: true,
         toolbarHeight: 70,
+        actions: [
+          IconButton(
+            icon: context.watch<GpaProvider>().editMode
+                ? const Icon(CustomIcons.eye)
+                : const Icon(Icons.edit_rounded),
+            onPressed: () {
+              context.read<GpaProvider>().toggleMode();
+            },
+          ),
+        ],
       ),
       drawer: sideDrawer(context),
       body: Column(

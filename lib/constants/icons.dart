@@ -20,4 +20,6 @@ class CustomIcons {
       IconData(0xe805, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData weight_regular =
       IconData(0xe806, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData eye =
+      IconData(0xe807, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }
