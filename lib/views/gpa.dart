@@ -20,17 +20,6 @@ class _GPACalculatorState extends State<GPACalculator> {
     super.dispose();
   }
 
-  final ScrollController scrollController = ScrollController();
-
-// This is what you're looking for!
-  void _scrollDown() {
-    scrollController.animateTo(
-      scrollController.position.maxScrollExtent,
-      duration: Duration(seconds: 2),
-      curve: Curves.fastOutSlowIn,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,6 +46,17 @@ class _GPACalculatorState extends State<GPACalculator> {
 }
 
 Widget editAndViewMode(BuildContext context) {
+  final ScrollController scrollController = ScrollController();
+
+// This is what you're looking for!
+  void scrollDown() {
+    scrollController.animateTo(
+      scrollController.position.maxScrollExtent,
+      duration: const Duration(seconds: 1),
+      curve: Curves.fastOutSlowIn,
+    );
+  }
+
   if (context.watch<GpaProvider>().editMode) {
     return Column(
       // crossAxisAlignment: CrossAxisAlignment.end,
@@ -113,6 +113,7 @@ Widget editAndViewMode(BuildContext context) {
                         ),
                         onPressed: () {
                           context.read<GpaProvider>().addCourse();
+                          scrollDown();
                         },
                         icon: const Icon(
                           Icons.add,
@@ -137,7 +138,7 @@ Widget editAndViewMode(BuildContext context) {
                     itemCount: context.watch<GpaProvider>().courseValues.length,
                     physics: const AlwaysScrollableScrollPhysics(),
                     scrollDirection: Axis.vertical,
-                    controller: ,
+                    controller: scrollController,
                     itemBuilder: (context, index) {
                       final course =
                           context.watch<GpaProvider>().courseValues[index];
