@@ -6,6 +6,7 @@ import '../constants/const.dart';
 
 class GpaProvider with ChangeNotifier {
   bool editMode = false;
+
   List<Course> _courseValues = [
     Course(letterGrade: "A", level: "Regular"),
     Course(letterGrade: "A", level: "Regular"),

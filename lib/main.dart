@@ -15,7 +15,7 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
-  await Hive.initFlutter();
+  Hive.initFlutter();
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => CourseCalculatorProvider()),
