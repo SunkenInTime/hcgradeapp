@@ -14,8 +14,12 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:provider/provider.dart';
 
+import 'constants/const.dart';
+
 void main() async {
-  Hive.initFlutter();
+  await Hive.initFlutter();
+  await Hive.openBox<Course>("courseBox");
+  setList();
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => CourseCalculatorProvider()),

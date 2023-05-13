@@ -5,6 +5,15 @@ import 'icons.dart';
 
 final listGradeOptions = ["A", "B", "C", "D", "E"];
 final courseLevelOptions = ["Regular", "Honors", "AP and G/T"];
+final List<Course> defaultCourseListValues = [
+  Course(letterGrade: "A", level: "Regular"),
+  Course(letterGrade: "A", level: "Regular"),
+  Course(letterGrade: "A", level: "Regular"),
+  Course(letterGrade: "A", level: "Regular"),
+  Course(letterGrade: "A", level: "Regular"),
+  Course(letterGrade: "A", level: "Regular"),
+  Course(letterGrade: "A", level: "Regular"),
+];
 DropdownMenuItem<String> buildMenuItem(String theme) => DropdownMenuItem(
       value: theme,
       child: Text(
@@ -64,15 +73,15 @@ Widget sideDrawer(context) {
     backgroundColor: mainColor,
     child: ListView(
       padding: EdgeInsets.zero,
-      children: [
+      children: const [
         SizedBox(
           height: 120,
           child: DrawerHeader(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               color: Colors.black,
             ),
             child: Row(
-              children: const [
+              children: [
                 Padding(padding: EdgeInsets.symmetric(horizontal: 5)),
                 Icon(
                   CustomIcons.menusquare,
@@ -92,8 +101,8 @@ Widget sideDrawer(context) {
             ),
           ),
         ),
-        const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-        const Text(
+        Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+        Text(
           "Coming Soon",
           style: TextStyle(color: Colors.white),
         )
