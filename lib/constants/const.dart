@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hcgradeapp/themes/theme_const.dart';
+import 'package:flutter_donation_buttons/flutter_donation_buttons.dart';
 
 import 'icons.dart';
 
@@ -101,9 +102,17 @@ Widget sideDrawer(context) {
             ),
           ),
         ),
-        Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+        Padding(padding: EdgeInsets.symmetric(vertical: 5)),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 15),
+          child: BuyMeACoffeeButton(
+            buyMeACoffeeName: "sunkenintime",
+            color: BuyMeACoffeeColor.Violet,
+          ),
+        ),
         Text(
-          "Coming Soon",
+          "Support me :)",
+          textAlign: TextAlign.center,
           style: TextStyle(color: Colors.white),
         )
       ],
