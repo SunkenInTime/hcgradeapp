@@ -103,7 +103,6 @@ Widget sideDrawer(context) {
             ),
           ),
         ),
-        Padding(padding: EdgeInsets.symmetric(vertical: 10)),
         const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
