@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hcgradeapp/themes/theme_const.dart';
 
+import 'package:flutter_donation_buttons/flutter_donation_buttons.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import 'icons.dart';
 
 final listGradeOptions = ["A", "B", "C", "D", "E"];
@@ -73,8 +75,8 @@ Widget sideDrawer(context) {
     backgroundColor: mainColor,
     child: ListView(
       padding: EdgeInsets.zero,
-      children: const [
-        SizedBox(
+      children: [
+        const SizedBox(
           height: 120,
           child: DrawerHeader(
             decoration: BoxDecoration(
@@ -102,10 +104,34 @@ Widget sideDrawer(context) {
           ),
         ),
         Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-        Text(
-          "Coming Soon",
+        const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: SizedBox(
+              width: 20,
+              height: 42,
+              child: ElevatedButton(
+                  onPressed: () {
+                    launchUrlString(
+                        "https://me.daracloud.uk/privacy-policies/grade-aid-privacy-policy/");
+                  },
+                  style:
+                      ElevatedButton.styleFrom(backgroundColor: Colors.black),
+                  child: const Text("Privacy Policy"))),
+        ),
+        const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 15),
+          child: BuyMeACoffeeButton(
+            buyMeACoffeeName: "sunkenintime",
+            color: BuyMeACoffeeColor.Violet,
+          ),
+        ),
+        const Text(
+          "Support me :)",
+          textAlign: TextAlign.center,
           style: TextStyle(color: Colors.white),
-        )
+        ),
       ],
     ),
   );

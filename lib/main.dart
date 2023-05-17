@@ -19,7 +19,7 @@ import 'constants/const.dart';
 void main() async {
   await Hive.initFlutter();
   await Hive.openBox<Course>("courseBox");
-  setList();
+
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => CourseCalculatorProvider()),
