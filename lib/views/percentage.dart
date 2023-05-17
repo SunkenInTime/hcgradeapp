@@ -40,6 +40,7 @@ class _PercentageCalculatorViewState extends State<PercentageCalculatorView> {
           toolbarHeight: 70,
         ),
         drawer: sideDrawer(context),
+        drawerEdgeDragWidth: MediaQuery.of(context).size.width,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [

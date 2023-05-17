@@ -19,6 +19,7 @@ class FullYearCourseCalculator extends StatelessWidget {
         toolbarHeight: 70,
       ),
       drawer: sideDrawer(context),
+      drawerEdgeDragWidth: MediaQuery.of(context).size.width,
       body: Column(
         // mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[

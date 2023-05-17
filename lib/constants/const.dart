@@ -112,7 +112,8 @@ Widget sideDrawer(context) {
               child: ElevatedButton(
                   onPressed: () {
                     launchUrlString(
-                        "https://me.daracloud.uk/privacy-policies/grade-aid-privacy-policy/");
+                        "https://me.daracloud.uk/privacy-policies/grade-aid-privacy-policy/",
+                        mode: LaunchMode.externalApplication);
                   },
                   style:
                       ElevatedButton.styleFrom(backgroundColor: Colors.black),

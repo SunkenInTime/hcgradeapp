@@ -40,6 +40,7 @@ class _GPACalculatorState extends State<GPACalculator> {
         ],
       ),
       drawer: sideDrawer(context),
+      drawerEdgeDragWidth: MediaQuery.of(context).size.width,
       body: editAndViewMode(context),
     );
   }
