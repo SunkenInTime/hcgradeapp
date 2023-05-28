@@ -90,7 +90,7 @@ class BottomNavBar extends StatelessWidget {
         PersistentBottomNavBarItem(
           icon: const Icon(CustomIcons.percent),
           title: ("Percentage"),
-          activeColorPrimary: const Color(0xFF66C4E4),
+          activeColorPrimary: const Color.fromRGBO(102, 196, 228, 1),
           inactiveColorPrimary: const Color.fromRGBO(255, 255, 255, 0.5),
         ),
       ];

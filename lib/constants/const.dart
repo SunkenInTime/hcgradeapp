@@ -228,3 +228,5 @@ Widget drawerIcon() {
     ),
   );
 }
+
+const snackBar = SnackBar(content: Text("Please calculate your changes."));

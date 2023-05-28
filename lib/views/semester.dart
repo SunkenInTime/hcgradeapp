@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:hcgradeapp/views/explainHowSemesterView.dart';
 import 'package:provider/provider.dart';
 
 import '../constants/const.dart';
@@ -13,12 +14,28 @@ class SemesterCalculator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SemesterCourseProvider provider = context.watch<SemesterCourseProvider>();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Semester Courses"),
         leading: drawerIcon(),
         centerTitle: true,
         toolbarHeight: 70,
+        actions: [
+          IconButton(
+              onPressed: () async {
+                if (provider.isCalculated) {
+                  Navigator.of(context).push(PageRouteBuilder(
+                    opaque: false,
+                    pageBuilder: (BuildContext context, _, __) =>
+                        const ExplainHowSemesterView(),
+                  ));
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                }
+              },
+              icon: const Icon(Icons.question_mark_rounded))
+        ],
       ),
       drawer: sideDrawer(context),
       drawerEdgeDragWidth: MediaQuery.of(context).size.width,
@@ -35,13 +52,19 @@ class SemesterCalculator extends StatelessWidget {
                   children: [
                     const Text(
                       "Your grade",
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: "SF Pro Text",
+                      ),
                     ),
                     Text(
                       //Fetches the calculated letter grade
                       context.watch<SemesterCourseProvider>().letterGrade,
-                      style: const TextStyle(fontSize: 60),
+                      style: const TextStyle(
+                          fontSize: 60,
+                          fontFamily: "SF Pro Text",
+                          fontWeight: FontWeight.w600),
                     ),
                   ],
                 ),

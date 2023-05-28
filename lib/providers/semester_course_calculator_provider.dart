@@ -5,6 +5,7 @@ import '../constants/const.dart';
 class SemesterCourseProvider with ChangeNotifier {
   List<String?> _semesterValues = ["A", "A", "A"];
   String _letterGrade = "A";
+  bool isCalculated = true;
 
   List<String?> get semesterValues => _semesterValues;
   String get letterGrade => _letterGrade;
@@ -16,6 +17,7 @@ class SemesterCourseProvider with ChangeNotifier {
     int calc = quater1 + quater2 + midterm;
     double ans = calc / 5;
     _letterGrade = numToLetter(ans);
+    isCalculated = true;
     notifyListeners();
   }
 
@@ -26,7 +28,7 @@ class SemesterCourseProvider with ChangeNotifier {
 
   void ChangeGrade(int index, String? value) {
     _semesterValues[index] = value;
-
+    isCalculated = false;
     notifyListeners();
   }
 }
