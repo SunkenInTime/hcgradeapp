@@ -6,7 +6,7 @@ import '../constants/const.dart';
 
 class GpaProvider with ChangeNotifier {
   bool editMode = false;
-
+  bool isCalculated = true;
   List<Course> _courseValues = [
     Course(letterGrade: "A", level: "Regular"),
     Course(letterGrade: "A", level: "Regular"),
@@ -23,6 +23,7 @@ class GpaProvider with ChangeNotifier {
     if (courseValues.length <= 1) return;
     _courseValues.removeAt(index);
     calculateGPA();
+    isCalculated = true;
     notifyListeners();
   }
 
@@ -36,18 +37,21 @@ class GpaProvider with ChangeNotifier {
       Course(letterGrade: "A", level: "Regular"),
       Course(letterGrade: "A", level: "Regular"),
     ];
+
     calculateGPA();
+
+    notifyListeners();
   }
 
   void addCourse() {
     _courseValues.add(Course(letterGrade: "A", level: "Regular"));
-
+    isCalculated = false;
     notifyListeners();
   }
 
   void updateCourse(int index, Course newCourse) {
     _courseValues[index] = newCourse;
-
+    isCalculated = false;
     notifyListeners();
   }
 
@@ -57,10 +61,11 @@ class GpaProvider with ChangeNotifier {
       ans += letterToNumWeighted(course.letterGrade!, course.level!);
     }
     double length = _courseValues.length.toDouble();
-    log(length.toString());
+
     ans = ans / length;
 
     _gpaValue = ans.toStringAsFixed(2);
+    isCalculated = true;
     notifyListeners();
   }
 
@@ -71,6 +76,7 @@ class GpaProvider with ChangeNotifier {
       editMode = true;
     }
     log(editMode.toString());
+
     notifyListeners();
   }
 }

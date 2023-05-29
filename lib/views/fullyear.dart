@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hcgradeapp/constants/icons.dart';
 import 'package:hcgradeapp/themes/theme_const.dart';
 import 'package:hcgradeapp/views/explainHowFullYearView.dart';
+
 import 'package:provider/provider.dart';
 
 import '../constants/const.dart';
@@ -14,6 +15,7 @@ class FullYearCourseCalculator extends StatelessWidget {
   Widget build(BuildContext context) {
     CourseCalculatorProvider provider =
         context.watch<CourseCalculatorProvider>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Full Year Course"),
@@ -189,7 +191,16 @@ class FullYearCourseCalculator extends StatelessWidget {
                 ),
               ),
             ),
-          ])
+          ]),
+          provider.isCalculated
+              ? const SizedBox(
+                  width: 0,
+                  height: 0,
+                )
+              : const Text(
+                  "Changes have not been calculated.",
+                  style: TextStyle(color: Colors.red),
+                ),
         ],
       ),
     );

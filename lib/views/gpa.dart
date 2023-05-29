@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hcgradeapp/providers/gpa_calculator_provider.dart';
+import 'package:hcgradeapp/views/explainHowGPAView.dart';
 import 'package:provider/provider.dart';
 
 import '../constants/const.dart';
@@ -22,6 +23,7 @@ class _GPACalculatorState extends State<GPACalculator> {
 
   @override
   Widget build(BuildContext context) {
+    GpaProvider provider = context.watch<GpaProvider>();
     return Scaffold(
       appBar: AppBar(
         title: const Text("GPA Calculator"),
@@ -29,6 +31,19 @@ class _GPACalculatorState extends State<GPACalculator> {
         centerTitle: true,
         toolbarHeight: 70,
         actions: [
+          IconButton(
+              onPressed: () async {
+                if (provider.isCalculated) {
+                  Navigator.of(context).push(PageRouteBuilder(
+                    opaque: false,
+                    pageBuilder: (BuildContext context, _, __) =>
+                        const ExplainHowGPAView(),
+                  ));
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                }
+              },
+              icon: const Icon(Icons.question_mark_rounded)),
           IconButton(
             icon: context.watch<GpaProvider>().editMode
                 ? const Icon(CustomIcons.eye)
@@ -48,7 +63,7 @@ class _GPACalculatorState extends State<GPACalculator> {
 
 Widget editAndViewMode(BuildContext context) {
   final ScrollController scrollController = ScrollController();
-
+  GpaProvider provider = context.watch<GpaProvider>();
 // This is what you're looking for!
   void scrollDown() {
     scrollController.animateTo(
@@ -339,7 +354,16 @@ Widget editAndViewMode(BuildContext context) {
               ),
             ]),
           ),
-        )
+        ),
+        provider.isCalculated
+            ? const SizedBox(
+                width: 0,
+                height: 0,
+              )
+            : const Text(
+                "Changes have not been calculated.",
+                style: TextStyle(color: Colors.red),
+              ),
       ],
     );
   } else {
@@ -578,7 +602,16 @@ Widget editAndViewMode(BuildContext context) {
               ),
             ]),
           ),
-        )
+        ),
+        provider.isCalculated
+            ? const SizedBox(
+                width: 0,
+                height: 0,
+              )
+            : const Text(
+                "Changes have not been calculated.",
+                style: TextStyle(color: Colors.red),
+              ),
       ],
     );
   }

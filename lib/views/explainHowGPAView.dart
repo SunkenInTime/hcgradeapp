@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hcgradeapp/constants/const.dart';
+import 'package:hcgradeapp/providers/gpa_calculator_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher_string.dart';
+
+import '../themes/theme_const.dart';
 
 class ExplainHowGPAView extends StatefulWidget {
   const ExplainHowGPAView({super.key});
@@ -11,25 +16,49 @@ class ExplainHowGPAView extends StatefulWidget {
 class _ExplainHowGPAViewState extends State<ExplainHowGPAView> {
   @override
   Widget build(BuildContext context) {
+    GpaProvider provider = context.watch<GpaProvider>();
+    List<Course> courseValues = provider.courseValues;
+    String textBuilder() {
+      String text = "";
+      double addedNumbers = 0;
+      for (int i = 0; i < courseValues.length; i++) {
+        Course course = courseValues[i];
+        text +=
+            'Course ${i + 1} = ${course.letterGrade}, ${course.level} = ${letterToNumWeighted(course.letterGrade!, course.level!)}\n';
+      }
+      text += "\n";
+
+      for (int i = 0; i < courseValues.length; i++) {
+        Course course = courseValues[i];
+        if (i != courseValues.length - 1) {
+          text +=
+              "${letterToNumWeighted(course.letterGrade!, course.level!)} + ";
+          addedNumbers +=
+              letterToNumWeighted(course.letterGrade!, course.level!);
+        } else {
+          text += "${letterToNumWeighted(course.letterGrade!, course.level!)}";
+          addedNumbers +=
+              letterToNumWeighted(course.letterGrade!, course.level!);
+        }
+      }
+      text += " = $addedNumbers\n";
+      text +=
+          "$addedNumbers  / ${courseValues.length} = ${(addedNumbers / courseValues.length.toDouble()).toStringAsFixed(2)}";
+      return text;
+    }
+
     return Scaffold(
+      backgroundColor: Colors.white.withOpacity(0.90),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Quarter 1 = ${provider.semesterValues[0]} = $quarter1 * 2 = ${quarter1 * 2}\n'
-              'Quarter 2 = ${provider.semesterValues[1]} = $quarter2 * 2 = ${quarter2 * 2}\n'
-              'Midterm = ${provider.semesterValues[2]} = $midterm * 1 = ${midterm * 1}\n',
+              textBuilder(),
               textAlign: TextAlign.center,
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                '$multipliedQuarter1 + $multipliedQuarter2 + $midterm = $addedGrades / 5 = $dividedGrades\n'
-                '$dividedGrades = ${provider.letterGrade}\n'
-                '*Having two consecutive E\'s will result in an overall grade of an E',
-                textAlign: TextAlign.center,
-              ),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
             ),
             const SizedBox(height: 15),
             TextButton(

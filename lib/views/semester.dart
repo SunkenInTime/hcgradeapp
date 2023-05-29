@@ -188,7 +188,16 @@ class SemesterCalculator extends StatelessWidget {
                 ),
               ),
             ),
-          ])
+          ]),
+          provider.isCalculated
+              ? const SizedBox(
+                  width: 0,
+                  height: 0,
+                )
+              : const Text(
+                  "Changes have not been calculated.",
+                  style: TextStyle(color: Colors.red),
+                ),
         ],
       ),
     );
