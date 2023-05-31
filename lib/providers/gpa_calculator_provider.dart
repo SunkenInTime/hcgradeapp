@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 
 import '../constants/const.dart';
@@ -75,7 +73,7 @@ class GpaProvider with ChangeNotifier {
     } else {
       editMode = true;
     }
-    log(editMode.toString());
+    // log(editMode.toString());
 
     notifyListeners();
   }

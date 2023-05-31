@@ -56,6 +56,7 @@ class _ExplainHowGPAViewState extends State<ExplainHowGPAView> {
             Text(
               textBuilder(),
               textAlign: TextAlign.center,
+              style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
             ),
             const Padding(
               padding: EdgeInsets.all(8.0),

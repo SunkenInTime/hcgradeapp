@@ -39,6 +39,15 @@ class _ExplainHowFullYearViewState extends State<ExplainHowFullYearView> {
     double dividedGrades = addedGrades / 10;
     return Scaffold(
       backgroundColor: Colors.white.withOpacity(0.85),
+      // appBar: AppBar(
+      //   actions: [
+      //     IconButton(
+      //         onPressed: () async {
+      //           Navigator.pop(context);
+      //         },
+      //         icon: const Icon(Icons.close))
+      //   ],
+      // ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -51,15 +60,21 @@ class _ExplainHowFullYearViewState extends State<ExplainHowFullYearView> {
               'Midterm = ${provider.quarterValues[4]} = $midterm * 1 = ${midterm * 1}\n'
               'Final = ${provider.quarterValues[5]} = $finals * 1 = ${finals * 1}\n',
               textAlign: TextAlign.center,
+              style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(top: 8.0, bottom: 2.0),
               child: Text(
                 '$multipliedQuarter1 + $multipliedQuarter2 + $multipliedQuarter3 + $multipliedQuarter4 + $midterm + $finals = $addedGrades / 10 = $dividedGrades\n'
-                '$dividedGrades = ${provider.letterGrade}\n'
-                '*Having two consecutive E\'s will result in an overall grade of an E',
+                '$dividedGrades = ${provider.letterGrade}\n',
                 textAlign: TextAlign.center,
+                style:
+                    const TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
               ),
+            ),
+            const Text(
+              '*Having two consecutive E\'s will \nresult in an overall grade of an E',
+              textAlign: TextAlign.center,
             ),
             const SizedBox(height: 15),
             TextButton(

@@ -102,9 +102,23 @@ Widget editAndViewMode(BuildContext context) {
                   ),
                 ],
               ),
-              const Text(
-                "*All grades are calculated\n using HCPSS Policy 8020.",
-                style: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.5)),
+              Column(
+                children: [
+                  const Text(
+                    "*All grades are calculated\n using HCPSS Policy 8020.",
+                    style: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.5)),
+                  ),
+                  const Padding(padding: EdgeInsets.only(top: 3)),
+                  provider.isCalculated
+                      ? const SizedBox(
+                          width: 0,
+                          height: 0,
+                        )
+                      : const Text(
+                          "Changes have not \n been calculated.",
+                          style: TextStyle(color: Colors.red),
+                        ),
+                ],
               ),
             ],
           ),
@@ -355,15 +369,15 @@ Widget editAndViewMode(BuildContext context) {
             ]),
           ),
         ),
-        provider.isCalculated
-            ? const SizedBox(
-                width: 0,
-                height: 0,
-              )
-            : const Text(
-                "Changes have not been calculated.",
-                style: TextStyle(color: Colors.red),
-              ),
+        // provider.isCalculated
+        //     ? const SizedBox(
+        //         width: 0,
+        //         height: 0,
+        //       )
+        //     : const Text(
+        //         "Changes have not been calculated.",
+        //         style: TextStyle(color: Colors.red),
+        //       ),
       ],
     );
   } else {
@@ -395,9 +409,23 @@ Widget editAndViewMode(BuildContext context) {
                   ),
                 ],
               ),
-              const Text(
-                "*All grades are calculated\n using HCPSS Policy 8020.",
-                style: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.5)),
+              Column(
+                children: [
+                  const Text(
+                    "*All grades are calculated\n using HCPSS Policy 8020.",
+                    style: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.5)),
+                  ),
+                  const Padding(padding: EdgeInsets.only(top: 3)),
+                  provider.isCalculated
+                      ? const SizedBox(
+                          width: 0,
+                          height: 0,
+                        )
+                      : const Text(
+                          "Changes have not \n been calculated.",
+                          style: TextStyle(color: Colors.red),
+                        ),
+                ],
               ),
             ],
           ),
@@ -603,15 +631,15 @@ Widget editAndViewMode(BuildContext context) {
             ]),
           ),
         ),
-        provider.isCalculated
-            ? const SizedBox(
-                width: 0,
-                height: 0,
-              )
-            : const Text(
-                "Changes have not been calculated.",
-                style: TextStyle(color: Colors.red),
-              ),
+        // provider.isCalculated
+        //     ? const SizedBox(
+        //         width: 0,
+        //         height: 0,
+        //       )
+        //     : const Text(
+        //         "Changes have not been calculated.",
+        //         style: TextStyle(color: Colors.red),
+        //       ),
       ],
     );
   }

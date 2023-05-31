@@ -32,15 +32,21 @@ class ExplainHowSemesterView extends StatelessWidget {
               'Quarter 2 = ${provider.semesterValues[1]} = $quarter2 * 2 = ${quarter2 * 2}\n'
               'Midterm = ${provider.semesterValues[2]} = $midterm * 1 = ${midterm * 1}\n',
               textAlign: TextAlign.center,
+              style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(top: 8.0, bottom: 2.0),
               child: Text(
                 '$multipliedQuarter1 + $multipliedQuarter2 + $midterm = $addedGrades / 5 = $dividedGrades\n'
-                '$dividedGrades = ${provider.letterGrade}\n'
-                '*Having two consecutive E\'s will result in an overall grade of an E',
+                '$dividedGrades = ${provider.letterGrade}\n',
                 textAlign: TextAlign.center,
+                style:
+                    const TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
               ),
+            ),
+            const Text(
+              '*Having two consecutive E\'s will \nresult in an overall grade of an E.',
+              textAlign: TextAlign.center,
             ),
             const SizedBox(height: 15),
             TextButton(
