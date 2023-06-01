@@ -27,8 +27,10 @@ class CourseCalculatorProvider with ChangeNotifier {
     double ans = calc / 10;
     List<int> listOfQuaters = [quarter1, quarter2, quarter3, quarter4];
     for (int i = 0; i < 3; i++) {
-      if (listOfQuaters[i] == 0 && listOfQuaters[i + 1] == 0) {
+      if (listOfQuaters[0] == 0 && listOfQuaters[1] == 0 ||
+          listOfQuaters[2] == 0 && listOfQuaters[3] == 0) {
         _letterGrade = numToLetter(0);
+        isCalculated = true;
         notifyListeners();
         return;
       }
