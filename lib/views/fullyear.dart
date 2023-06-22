@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hcgradeapp/constants/icons.dart';
 import 'package:hcgradeapp/themes/theme_const.dart';
 import 'package:hcgradeapp/views/explainHowFullYearView.dart';
-
 import 'package:provider/provider.dart';
-
 import '../constants/const.dart';
 import '../providers/full_course_calculator_provider.dart';
 
@@ -102,7 +100,11 @@ class FullYearCourseCalculator extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(
-                        top: 8.0, left: 14, right: 14, bottom: 14),
+                      top: 8.0,
+                      left: 14,
+                      right: 14,
+                      bottom: 14,
+                    ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

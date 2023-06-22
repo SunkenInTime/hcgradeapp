@@ -44,6 +44,7 @@ class _ExplainHowGPAViewState extends State<ExplainHowGPAView> {
       text += " = $addedNumbers\n";
       text +=
           "$addedNumbers  / ${courseValues.length} = ${(addedNumbers / courseValues.length.toDouble()).toStringAsFixed(2)}";
+
       return text;
     }
 
