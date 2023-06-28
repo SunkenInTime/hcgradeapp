@@ -35,6 +35,7 @@ class MiddleFullYearCourseCalculator extends StatelessWidget {
         ],
         centerTitle: true,
         toolbarHeight: 70,
+        backgroundColor: secondaryColor,
       ),
       drawer: sideDrawer(context),
       drawerEdgeDragWidth: MediaQuery.of(context).size.width,
@@ -192,7 +193,7 @@ class MiddleFullYearCourseCalculator extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.42,
               child: TextButton(
                 style: TextButton.styleFrom(
-                  backgroundColor: mainColor,
+                  backgroundColor: secondaryColor,
                 ),
                 onPressed: () {
                   context.read<CourseCalculatorProvider>().CalculateGrade();

@@ -112,13 +112,42 @@ class BottomNavBar extends StatelessWidget {
       ];
     }
 
+    List<PersistentBottomNavBarItem> _middleSchoolNavBarsItems() {
+      return [
+        PersistentBottomNavBarItem(
+            icon: const Icon(CustomIcons.vector),
+            title: ("Full Year"),
+            activeColorPrimary: const Color(0xFFFF3366),
+            inactiveColorPrimary: const Color.fromRGBO(255, 255, 255, 0.5),
+            iconSize: 22),
+        PersistentBottomNavBarItem(
+          icon: const Icon(CustomIcons.bookopentext),
+          title: ("Semester"),
+          activeColorPrimary: const Color(0xFFFF3366),
+          inactiveColorPrimary: const Color.fromRGBO(255, 255, 255, 0.5),
+        ),
+        PersistentBottomNavBarItem(
+          icon: const Icon(CustomIcons.mathoperations),
+          title: ("GPA"),
+          activeColorPrimary: const Color(0xFFFF3366),
+          inactiveColorPrimary: const Color.fromRGBO(255, 255, 255, 0.5),
+        ),
+        PersistentBottomNavBarItem(
+          icon: const Icon(CustomIcons.percent),
+          title: ("Percentage"),
+          activeColorPrimary: const Color(0xFFFF3366),
+          inactiveColorPrimary: const Color.fromRGBO(255, 255, 255, 0.5),
+        ),
+      ];
+    }
+
     if (context.watch<SchoolLevelProvider>().schoolLevel == "middle") {
       log("Middle schoool losers");
       return PersistentTabView(
         context,
         controller: controller,
         screens: _middleSchoolBuildScreens(),
-        items: _highSchoolNavBarsItems(),
+        items: _middleSchoolNavBarsItems(),
         confineInSafeArea: true,
         backgroundColor: Colors.black, // Default is Colors.white.
         handleAndroidBackButtonPress: true, // Default is true.
@@ -156,6 +185,7 @@ class BottomNavBar extends StatelessWidget {
         screens: _highSchoolBuildScreens(),
         items: _highSchoolNavBarsItems(),
         confineInSafeArea: true,
+
         backgroundColor: Colors.black, // Default is Colors.white.
         handleAndroidBackButtonPress: true, // Default is true.
         resizeToAvoidBottomInset:

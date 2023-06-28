@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-const Color scColor = Color.fromRGBO(44, 56, 166, 1);
-// const Color mainColor = Color(0xFFD6990A);
-const Color mainColor = Color(0xFF67001a);
+const Color mainColor = Color.fromRGBO(44, 56, 166, 1);
+const Color secondaryColor = Color(0xFF67001a);
 
 ThemeData highschoolThemeData = ThemeData(
   primaryColor: mainColor,
@@ -18,7 +17,7 @@ ThemeData highschoolThemeData = ThemeData(
   // useMaterial3: true,
 );
 ThemeData middleschoolThemeData = ThemeData(
-  primaryColor: scColor,
+  primaryColor: mainColor,
   colorScheme: ColorScheme.fromSwatch().copyWith(
     primary: mainColor,
     secondary: Colors.white,

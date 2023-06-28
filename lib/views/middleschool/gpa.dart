@@ -53,6 +53,7 @@ class _MiddleGPACalculatorState extends State<MiddleGPACalculator> {
             },
           ),
         ],
+        backgroundColor: secondaryColor,
       ),
       drawer: sideDrawer(context),
       drawerEdgeDragWidth: MediaQuery.of(context).size.width,
@@ -139,7 +140,7 @@ Widget editAndViewMode(BuildContext context) {
                       width: 169,
                       child: TextButton.icon(
                         style: TextButton.styleFrom(
-                          backgroundColor: mainColor,
+                          backgroundColor: secondaryColor,
                         ),
                         onPressed: () {
                           context.read<GpaProvider>().addCourse();
@@ -351,7 +352,7 @@ Widget editAndViewMode(BuildContext context) {
                 width: MediaQuery.of(context).size.width * 0.42,
                 child: TextButton(
                   style: TextButton.styleFrom(
-                    backgroundColor: mainColor,
+                    backgroundColor: secondaryColor,
                   ),
                   onPressed: () {
                     context.read<GpaProvider>().calculateGPA();
@@ -613,7 +614,7 @@ Widget editAndViewMode(BuildContext context) {
                 width: MediaQuery.of(context).size.width * 0.42,
                 child: TextButton(
                   style: TextButton.styleFrom(
-                    backgroundColor: mainColor,
+                    backgroundColor: secondaryColor,
                   ),
                   onPressed: () {
                     context.read<GpaProvider>().calculateGPA();

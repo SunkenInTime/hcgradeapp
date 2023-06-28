@@ -36,6 +36,7 @@ class MiddleSemesterCalculator extends StatelessWidget {
               },
               icon: const Icon(Icons.question_mark_rounded))
         ],
+        backgroundColor: secondaryColor,
       ),
       drawer: sideDrawer(context),
       drawerEdgeDragWidth: MediaQuery.of(context).size.width,
@@ -187,7 +188,7 @@ class MiddleSemesterCalculator extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.42,
               child: TextButton(
                 style: TextButton.styleFrom(
-                  backgroundColor: mainColor,
+                  backgroundColor: secondaryColor,
                 ),
                 onPressed: () {
                   context.read<SemesterCourseProvider>().CalculateGrade();

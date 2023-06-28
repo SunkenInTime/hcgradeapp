@@ -73,7 +73,10 @@ String numToLetter(double calc) {
 
 Widget sideDrawer(BuildContext context) {
   return Drawer(
-    backgroundColor: mainColor,
+    backgroundColor:
+        context.watch<SchoolLevelProvider>().schoolLevel == "middle"
+            ? secondaryColor
+            : mainColor,
     child: ListView(
       padding: EdgeInsets.zero,
       children: [
