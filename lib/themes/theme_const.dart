@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 const Color scColor = Color.fromRGBO(44, 56, 166, 1);
-const Color mainColor = Color(0xFFD6990A);
+// const Color mainColor = Color(0xFFD6990A);
+const Color mainColor = Color(0xFF67001a);
+
 ThemeData highschoolThemeData = ThemeData(
   primaryColor: mainColor,
   colorScheme: ColorScheme.fromSwatch().copyWith(
