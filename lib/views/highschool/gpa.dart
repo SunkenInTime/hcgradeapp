@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hcgradeapp/providers/gpa_calculator_provider.dart';
-import 'package:hcgradeapp/views/explainHowGPAView.dart';
+import 'package:hcgradeapp/views/highschool/explainHowGPAView.dart';
 import 'package:provider/provider.dart';
 
-import '../constants/const.dart';
-import '../constants/icons.dart';
-import '../themes/theme_const.dart';
+import '../../constants/const.dart';
+import '../../constants/icons.dart';
+import '../../themes/theme_const.dart';
 
 class GPACalculator extends StatefulWidget {
   const GPACalculator({super.key});

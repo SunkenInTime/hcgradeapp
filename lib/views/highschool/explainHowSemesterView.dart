@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hcgradeapp/providers/semester_course_calculator_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-import '../constants/const.dart';
-import '../themes/theme_const.dart';
+import '../../constants/const.dart';
+import '../../themes/theme_const.dart';
 
 class ExplainHowSemesterView extends StatelessWidget {
   const ExplainHowSemesterView({super.key});

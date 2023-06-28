@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-import '../constants/const.dart';
-import '../providers/full_course_calculator_provider.dart';
-import '../themes/theme_const.dart';
+import '../../constants/const.dart';
+import '../../providers/full_course_calculator_provider.dart';
+import '../../themes/theme_const.dart';
 
 class ExplainHowFullYearView extends StatefulWidget {
   const ExplainHowFullYearView({super.key});

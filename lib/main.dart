@@ -1,14 +1,20 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:hcgradeapp/constants/icons.dart';
 import 'package:hcgradeapp/constants/routes.dart';
 import 'package:hcgradeapp/providers/full_course_calculator_provider.dart';
 import 'package:hcgradeapp/providers/gpa_calculator_provider.dart';
+import 'package:hcgradeapp/providers/school_level_provider.dart';
 import 'package:hcgradeapp/providers/semester_course_calculator_provider.dart';
 import 'package:hcgradeapp/themes/theme_const.dart';
-import 'package:hcgradeapp/views/fullyear.dart';
-import 'package:hcgradeapp/views/gpa.dart';
-import 'package:hcgradeapp/views/percentage.dart';
-import 'package:hcgradeapp/views/semester.dart';
+import 'package:hcgradeapp/views/highschool/fullyear.dart';
+import 'package:hcgradeapp/views/highschool/gpa.dart';
+import 'package:hcgradeapp/views/highschool/percentage.dart';
+import 'package:hcgradeapp/views/highschool/semester.dart';
+import 'package:hcgradeapp/views/middleschool/fullyear.dart';
+import 'package:hcgradeapp/views/middleschool/gpa.dart';
+import 'package:hcgradeapp/views/middleschool/semester.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
@@ -25,6 +31,7 @@ void main() async {
       ChangeNotifierProvider(create: (_) => CourseCalculatorProvider()),
       ChangeNotifierProvider(create: (_) => SemesterCourseProvider()),
       ChangeNotifierProvider(create: (_) => GpaProvider()),
+      ChangeNotifierProvider(create: (_) => SchoolLevelProvider())
     ],
     child: const MyApp(),
   ));
@@ -37,7 +44,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: themeData,
+      theme: highschoolThemeData,
       home: const BottomNavBar(),
       routes: {
         courseCalculatorRoute: (context) => const FullYearCourseCalculator(),
@@ -58,7 +65,7 @@ class BottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     PersistentTabController controller;
     controller = PersistentTabController(initialIndex: 0);
-    List<Widget> _buildScreens() {
+    List<Widget> _highSchoolBuildScreens() {
       return [
         const FullYearCourseCalculator(),
         const SemesterCalculator(),
@@ -67,7 +74,16 @@ class BottomNavBar extends StatelessWidget {
       ];
     }
 
-    List<PersistentBottomNavBarItem> _navBarsItems() {
+    List<Widget> _middleSchoolBuildScreens() {
+      return [
+        const MiddleFullYearCourseCalculator(),
+        const MiddleSemesterCalculator(),
+        const MiddleGPACalculator(),
+        const PercentageCalculatorView(),
+      ];
+    }
+
+    List<PersistentBottomNavBarItem> _highSchoolNavBarsItems() {
       return [
         PersistentBottomNavBarItem(
             icon: const Icon(CustomIcons.vector),
@@ -96,39 +112,78 @@ class BottomNavBar extends StatelessWidget {
       ];
     }
 
-    return PersistentTabView(
-      context,
-      controller: controller,
-      screens: _buildScreens(),
-      items: _navBarsItems(),
-      confineInSafeArea: true,
-      backgroundColor: Colors.black, // Default is Colors.white.
-      handleAndroidBackButtonPress: true, // Default is true.
-      resizeToAvoidBottomInset:
-          true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
-      stateManagement: true, // Default is true.
-      hideNavigationBarWhenKeyboardShows:
-          true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
-      decoration: const NavBarDecoration(
-        // borderRadius: BorderRadius.circular(10.0),
-        colorBehindNavBar: Colors.black,
-      ),
-      popAllScreensOnTapOfSelectedTab: true,
-      popActionScreens: PopActionScreensType.all,
-      itemAnimationProperties: const ItemAnimationProperties(
-        // Navigation Bar's items animation properties.
-        duration: Duration(milliseconds: 200),
-        curve: Curves.ease,
-      ),
-      screenTransitionAnimation: const ScreenTransitionAnimation(
-        // Screen transition animation on change of selected tab.
-        animateTabTransition: true,
-        curve: Curves.ease,
-        duration: Duration(milliseconds: 200),
-      ),
-      navBarStyle:
-          NavBarStyle.style9, // Choose the nav bar style with this property.
-      navBarHeight: 65,
-    );
+    if (context.watch<SchoolLevelProvider>().schoolLevel == "middle") {
+      log("Middle schoool losers");
+      return PersistentTabView(
+        context,
+        controller: controller,
+        screens: _middleSchoolBuildScreens(),
+        items: _highSchoolNavBarsItems(),
+        confineInSafeArea: true,
+        backgroundColor: Colors.black, // Default is Colors.white.
+        handleAndroidBackButtonPress: true, // Default is true.
+        resizeToAvoidBottomInset:
+            true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
+        stateManagement: true, // Default is true.
+        hideNavigationBarWhenKeyboardShows:
+            true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
+        decoration: const NavBarDecoration(
+          // borderRadius: BorderRadius.circular(10.0),
+          colorBehindNavBar: Colors.black,
+        ),
+        popAllScreensOnTapOfSelectedTab: true,
+        popActionScreens: PopActionScreensType.all,
+        itemAnimationProperties: const ItemAnimationProperties(
+          // Navigation Bar's items animation properties.
+          duration: Duration(milliseconds: 200),
+          curve: Curves.ease,
+        ),
+        screenTransitionAnimation: const ScreenTransitionAnimation(
+          // Screen transition animation on change of selected tab.
+          animateTabTransition: true,
+          curve: Curves.ease,
+          duration: Duration(milliseconds: 200),
+        ),
+        navBarStyle:
+            NavBarStyle.style9, // Choose the nav bar style with this property.
+        navBarHeight: 65,
+      );
+    } else {
+      log("Pro highschoolers");
+      return PersistentTabView(
+        context,
+        controller: controller,
+        screens: _highSchoolBuildScreens(),
+        items: _highSchoolNavBarsItems(),
+        confineInSafeArea: true,
+        backgroundColor: Colors.black, // Default is Colors.white.
+        handleAndroidBackButtonPress: true, // Default is true.
+        resizeToAvoidBottomInset:
+            true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
+        stateManagement: true, // Default is true.
+        hideNavigationBarWhenKeyboardShows:
+            true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
+        decoration: const NavBarDecoration(
+          // borderRadius: BorderRadius.circular(10.0),
+          colorBehindNavBar: Colors.black,
+        ),
+        popAllScreensOnTapOfSelectedTab: true,
+        popActionScreens: PopActionScreensType.all,
+        itemAnimationProperties: const ItemAnimationProperties(
+          // Navigation Bar's items animation properties.
+          duration: Duration(milliseconds: 200),
+          curve: Curves.ease,
+        ),
+        screenTransitionAnimation: const ScreenTransitionAnimation(
+          // Screen transition animation on change of selected tab.
+          animateTabTransition: true,
+          curve: Curves.ease,
+          duration: Duration(milliseconds: 200),
+        ),
+        navBarStyle:
+            NavBarStyle.style9, // Choose the nav bar style with this property.
+        navBarHeight: 65,
+      );
+    }
   }
 }

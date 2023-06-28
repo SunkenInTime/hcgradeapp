@@ -1,26 +1,23 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
-import 'package:hcgradeapp/views/explainHowSemesterView.dart';
+import 'package:hcgradeapp/constants/icons.dart';
+import 'package:hcgradeapp/themes/theme_const.dart';
+import 'package:hcgradeapp/views/highschool/explainHowFullYearView.dart';
 import 'package:provider/provider.dart';
+import '../../constants/const.dart';
+import '../../providers/full_course_calculator_provider.dart';
 
-import '../constants/const.dart';
-import '../constants/icons.dart';
-import '../providers/semester_course_calculator_provider.dart';
-import '../themes/theme_const.dart';
-
-class SemesterCalculator extends StatelessWidget {
-  const SemesterCalculator({super.key});
+class MiddleFullYearCourseCalculator extends StatelessWidget {
+  const MiddleFullYearCourseCalculator({super.key});
 
   @override
   Widget build(BuildContext context) {
-    SemesterCourseProvider provider = context.watch<SemesterCourseProvider>();
+    CourseCalculatorProvider provider =
+        context.watch<CourseCalculatorProvider>();
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Semester Courses"),
+        title: const Text("Full Year Course"),
         leading: drawerIcon(),
-        centerTitle: true,
-        toolbarHeight: 70,
         actions: [
           IconButton(
               onPressed: () async {
@@ -28,7 +25,7 @@ class SemesterCalculator extends StatelessWidget {
                   Navigator.of(context).push(PageRouteBuilder(
                     opaque: false,
                     pageBuilder: (BuildContext context, _, __) =>
-                        const ExplainHowSemesterView(),
+                        const ExplainHowFullYearView(),
                   ));
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -36,6 +33,8 @@ class SemesterCalculator extends StatelessWidget {
               },
               icon: const Icon(Icons.question_mark_rounded))
         ],
+        centerTitle: true,
+        toolbarHeight: 70,
       ),
       drawer: sideDrawer(context),
       drawerEdgeDragWidth: MediaQuery.of(context).size.width,
@@ -60,7 +59,7 @@ class SemesterCalculator extends StatelessWidget {
                     ),
                     Text(
                       //Fetches the calculated letter grade
-                      context.watch<SemesterCourseProvider>().letterGrade,
+                      provider.letterGrade,
                       style: const TextStyle(
                           fontSize: 60,
                           fontFamily: "SF Pro Text",
@@ -68,6 +67,9 @@ class SemesterCalculator extends StatelessWidget {
                     ),
                   ],
                 ),
+                // const Padding(
+                //   padding: EdgeInsets.symmetric(horizontal: 50),
+                // ),
                 Column(
                   children: [
                     const Text(
@@ -92,19 +94,22 @@ class SemesterCalculator extends StatelessWidget {
           greyLineBreak(),
           ListView.builder(
             shrinkWrap: true,
-            itemCount:
-                context.watch<SemesterCourseProvider>().semesterValues.length,
+            itemCount: provider.quarterValues.length,
             itemBuilder: (context, index) {
               return Column(
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(
-                        top: 8.0, left: 14, right: 14, bottom: 14),
+                      top: 8.0,
+                      left: 14,
+                      right: 14,
+                      bottom: 14,
+                    ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          indexToSemesterName(index),
+                          indexToCourseName(index),
                           style: const TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.bold,
@@ -135,11 +140,11 @@ class SemesterCalculator extends StatelessWidget {
                                   );
                                 }).toList(),
                                 value: context
-                                    .watch<SemesterCourseProvider>()
-                                    .semesterValues[index],
+                                    .watch<CourseCalculatorProvider>()
+                                    .quarterValues[index],
                                 onChanged: (String? value) {
                                   return context
-                                      .read<SemesterCourseProvider>()
+                                      .read<CourseCalculatorProvider>()
                                       .ChangeGrade(index, value);
                                 },
                                 style: const TextStyle(
@@ -166,10 +171,10 @@ class SemesterCalculator extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.42,
               child: TextButton(
                 style: TextButton.styleFrom(
-                  backgroundColor: const Color(0xFFADADAD),
+                  backgroundColor: const Color.fromRGBO(173, 173, 173, 1),
                 ),
                 onPressed: () {
-                  context.read<SemesterCourseProvider>().resetGrade();
+                  context.read<CourseCalculatorProvider>().resetGrade();
                 },
                 child: const Text(
                   "Reset",
@@ -190,7 +195,7 @@ class SemesterCalculator extends StatelessWidget {
                   backgroundColor: mainColor,
                 ),
                 onPressed: () {
-                  context.read<SemesterCourseProvider>().CalculateGrade();
+                  context.read<CourseCalculatorProvider>().CalculateGrade();
                 },
                 child: const Text(
                   "Calculate",

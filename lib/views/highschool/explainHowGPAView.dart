@@ -4,7 +4,7 @@ import 'package:hcgradeapp/providers/gpa_calculator_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-import '../themes/theme_const.dart';
+import '../../themes/theme_const.dart';
 
 class ExplainHowGPAView extends StatefulWidget {
   const ExplainHowGPAView({super.key});

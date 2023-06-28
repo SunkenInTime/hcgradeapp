@@ -17,5 +17,6 @@ class PercentageProvider with ChangeNotifier {
     percentAndLetter[1] = calculateLetterWithPercent(percentage);
     _letterGrade = percentAndLetter[1];
     _percentageValue = percentAndLetter[0];
+    notifyListeners();
   }
 }

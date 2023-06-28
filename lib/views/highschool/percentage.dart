@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hcgradeapp/constants/const.dart';
 
-import '../themes/theme_const.dart';
+import '../../themes/theme_const.dart';
 
 class PercentageCalculatorView extends StatefulWidget {
   const PercentageCalculatorView({super.key});

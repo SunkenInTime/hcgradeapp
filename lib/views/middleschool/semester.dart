@@ -1,23 +1,26 @@
-import 'package:flutter/material.dart';
-import 'package:hcgradeapp/constants/icons.dart';
-import 'package:hcgradeapp/themes/theme_const.dart';
-import 'package:hcgradeapp/views/explainHowFullYearView.dart';
-import 'package:provider/provider.dart';
-import '../constants/const.dart';
-import '../providers/full_course_calculator_provider.dart';
+// ignore_for_file: prefer_const_literals_to_create_immutables
 
-class FullYearCourseCalculator extends StatelessWidget {
-  const FullYearCourseCalculator({super.key});
+import 'package:flutter/material.dart';
+import 'package:hcgradeapp/views/highschool/explainHowSemesterView.dart';
+import 'package:provider/provider.dart';
+
+import '../../constants/const.dart';
+import '../../constants/icons.dart';
+import '../../providers/semester_course_calculator_provider.dart';
+import '../../themes/theme_const.dart';
+
+class MiddleSemesterCalculator extends StatelessWidget {
+  const MiddleSemesterCalculator({super.key});
 
   @override
   Widget build(BuildContext context) {
-    CourseCalculatorProvider provider =
-        context.watch<CourseCalculatorProvider>();
-
+    SemesterCourseProvider provider = context.watch<SemesterCourseProvider>();
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Full Year Course"),
+        title: const Text("Semester Courses"),
         leading: drawerIcon(),
+        centerTitle: true,
+        toolbarHeight: 70,
         actions: [
           IconButton(
               onPressed: () async {
@@ -25,7 +28,7 @@ class FullYearCourseCalculator extends StatelessWidget {
                   Navigator.of(context).push(PageRouteBuilder(
                     opaque: false,
                     pageBuilder: (BuildContext context, _, __) =>
-                        const ExplainHowFullYearView(),
+                        const ExplainHowSemesterView(),
                   ));
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -33,8 +36,6 @@ class FullYearCourseCalculator extends StatelessWidget {
               },
               icon: const Icon(Icons.question_mark_rounded))
         ],
-        centerTitle: true,
-        toolbarHeight: 70,
       ),
       drawer: sideDrawer(context),
       drawerEdgeDragWidth: MediaQuery.of(context).size.width,
@@ -59,7 +60,7 @@ class FullYearCourseCalculator extends StatelessWidget {
                     ),
                     Text(
                       //Fetches the calculated letter grade
-                      provider.letterGrade,
+                      context.watch<SemesterCourseProvider>().letterGrade,
                       style: const TextStyle(
                           fontSize: 60,
                           fontFamily: "SF Pro Text",
@@ -67,9 +68,6 @@ class FullYearCourseCalculator extends StatelessWidget {
                     ),
                   ],
                 ),
-                // const Padding(
-                //   padding: EdgeInsets.symmetric(horizontal: 50),
-                // ),
                 Column(
                   children: [
                     const Text(
@@ -94,22 +92,19 @@ class FullYearCourseCalculator extends StatelessWidget {
           greyLineBreak(),
           ListView.builder(
             shrinkWrap: true,
-            itemCount: provider.quarterValues.length,
+            itemCount:
+                context.watch<SemesterCourseProvider>().semesterValues.length,
             itemBuilder: (context, index) {
               return Column(
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(
-                      top: 8.0,
-                      left: 14,
-                      right: 14,
-                      bottom: 14,
-                    ),
+                        top: 8.0, left: 14, right: 14, bottom: 14),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          indexToCourseName(index),
+                          indexToSemesterName(index),
                           style: const TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.bold,
@@ -140,11 +135,11 @@ class FullYearCourseCalculator extends StatelessWidget {
                                   );
                                 }).toList(),
                                 value: context
-                                    .watch<CourseCalculatorProvider>()
-                                    .quarterValues[index],
+                                    .watch<SemesterCourseProvider>()
+                                    .semesterValues[index],
                                 onChanged: (String? value) {
                                   return context
-                                      .read<CourseCalculatorProvider>()
+                                      .read<SemesterCourseProvider>()
                                       .ChangeGrade(index, value);
                                 },
                                 style: const TextStyle(
@@ -171,10 +166,10 @@ class FullYearCourseCalculator extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.42,
               child: TextButton(
                 style: TextButton.styleFrom(
-                  backgroundColor: const Color.fromRGBO(173, 173, 173, 1),
+                  backgroundColor: const Color(0xFFADADAD),
                 ),
                 onPressed: () {
-                  context.read<CourseCalculatorProvider>().resetGrade();
+                  context.read<SemesterCourseProvider>().resetGrade();
                 },
                 child: const Text(
                   "Reset",
@@ -195,7 +190,7 @@ class FullYearCourseCalculator extends StatelessWidget {
                   backgroundColor: mainColor,
                 ),
                 onPressed: () {
-                  context.read<CourseCalculatorProvider>().CalculateGrade();
+                  context.read<SemesterCourseProvider>().CalculateGrade();
                 },
                 child: const Text(
                   "Calculate",
