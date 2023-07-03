@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../constants/const.dart';
+import '../../constants/const.dart';
 
 class CourseCalculatorProvider with ChangeNotifier {
   List<String?> _quarterValues = ["A", "A", "A", "A", "A", "A"];

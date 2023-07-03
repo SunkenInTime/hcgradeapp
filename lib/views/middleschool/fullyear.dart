@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:hcgradeapp/constants/icons.dart';
+import 'package:hcgradeapp/providers/middleschool/full_course_calculator_provider.dart';
 import 'package:hcgradeapp/themes/theme_const.dart';
-import 'package:hcgradeapp/views/explainHowFullYearView.dart';
+import 'package:hcgradeapp/views/middleschool/explainHowFullYearView.dart';
 import 'package:provider/provider.dart';
-import '../constants/const.dart';
-import '../providers/full_course_calculator_provider.dart';
+import '../../constants/const.dart';
 
-class FullYearCourseCalculator extends StatelessWidget {
-  const FullYearCourseCalculator({super.key});
+class MiddleFullYearCourseCalculator extends StatelessWidget {
+  const MiddleFullYearCourseCalculator({super.key});
 
   @override
   Widget build(BuildContext context) {
-    CourseCalculatorProvider provider =
-        context.watch<CourseCalculatorProvider>();
+    MiddleSchoolCourseCalculatorProvider provider =
+        context.watch<MiddleSchoolCourseCalculatorProvider>();
 
     return Scaffold(
       appBar: AppBar(
@@ -25,7 +25,7 @@ class FullYearCourseCalculator extends StatelessWidget {
                   Navigator.of(context).push(PageRouteBuilder(
                     opaque: false,
                     pageBuilder: (BuildContext context, _, __) =>
-                        const ExplainHowFullYearView(),
+                        const MiddleSchoolExplainHowFullYearView(),
                   ));
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -35,6 +35,7 @@ class FullYearCourseCalculator extends StatelessWidget {
         ],
         centerTitle: true,
         toolbarHeight: 70,
+        backgroundColor: secondaryColor,
       ),
       drawer: sideDrawer(context),
       drawerEdgeDragWidth: MediaQuery.of(context).size.width,
@@ -140,11 +141,13 @@ class FullYearCourseCalculator extends StatelessWidget {
                                   );
                                 }).toList(),
                                 value: context
-                                    .watch<CourseCalculatorProvider>()
+                                    .watch<
+                                        MiddleSchoolCourseCalculatorProvider>()
                                     .quarterValues[index],
                                 onChanged: (String? value) {
                                   return context
-                                      .read<CourseCalculatorProvider>()
+                                      .read<
+                                          MiddleSchoolCourseCalculatorProvider>()
                                       .ChangeGrade(index, value);
                                 },
                                 style: const TextStyle(
@@ -174,7 +177,9 @@ class FullYearCourseCalculator extends StatelessWidget {
                   backgroundColor: const Color.fromRGBO(173, 173, 173, 1),
                 ),
                 onPressed: () {
-                  context.read<CourseCalculatorProvider>().resetGrade();
+                  context
+                      .read<MiddleSchoolCourseCalculatorProvider>()
+                      .resetGrade();
                 },
                 child: const Text(
                   "Reset",
@@ -192,10 +197,12 @@ class FullYearCourseCalculator extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.42,
               child: TextButton(
                 style: TextButton.styleFrom(
-                  backgroundColor: mainColor,
+                  backgroundColor: secondaryColor,
                 ),
                 onPressed: () {
-                  context.read<CourseCalculatorProvider>().CalculateGrade();
+                  context
+                      .read<MiddleSchoolCourseCalculatorProvider>()
+                      .CalculateGrade();
                 },
                 child: const Text(
                   "Calculate",

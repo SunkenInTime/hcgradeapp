@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hcgradeapp/providers/highschool/school_level_provider.dart';
 import 'package:hcgradeapp/themes/theme_const.dart';
 import 'package:flutter_donation_buttons/flutter_donation_buttons.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'icons.dart';
 
@@ -69,11 +71,13 @@ String numToLetter(double calc) {
   }
 }
 
-Widget sideDrawer(context) {
+Widget sideDrawer(BuildContext context) {
   return Drawer(
-    backgroundColor: mainColor,
-    child: ListView(
-      padding: EdgeInsets.zero,
+    backgroundColor:
+        context.watch<SchoolLevelProvider>().schoolLevel == "middle"
+            ? secondaryColor
+            : mainColor,
+    child: Column(
       children: [
         const SizedBox(
           height: 120,
@@ -103,11 +107,33 @@ Widget sideDrawer(context) {
           ),
         ),
         const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
+        ListTile(
+          title: const Text(
+            "Highschool",
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+          onTap: () {
+            context.read<SchoolLevelProvider>().ChangeLevel("highschool");
+          },
+        ),
+        ListTile(
+          title: const Text(
+            "Middle School",
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+          onTap: () {
+            context.read<SchoolLevelProvider>().ChangeLevel("middle");
+          },
+        ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: SizedBox(
-              width: 20,
-              height: 42,
+              width: 270,
+              height: 43,
               child: ElevatedButton(
                   onPressed: () {
                     launchUrlString(
@@ -121,9 +147,13 @@ Widget sideDrawer(context) {
         const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 15),
-          child: BuyMeACoffeeButton(
-            buyMeACoffeeName: "sunkenintime",
-            color: BuyMeACoffeeColor.Violet,
+          child: SizedBox(
+            width: 270,
+            height: 42,
+            child: BuyMeACoffeeButton(
+              buyMeACoffeeName: "sunkenintime",
+              color: BuyMeACoffeeColor.Violet,
+            ),
           ),
         ),
         const Text(

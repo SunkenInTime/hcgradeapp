@@ -1,20 +1,22 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:hcgradeapp/views/explainHowSemesterView.dart';
+import 'package:hcgradeapp/providers/middleschool/semester_course_calculator_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../constants/const.dart';
-import '../constants/icons.dart';
-import '../providers/semester_course_calculator_provider.dart';
-import '../themes/theme_const.dart';
+import '../../constants/const.dart';
+import '../../constants/icons.dart';
 
-class SemesterCalculator extends StatelessWidget {
-  const SemesterCalculator({super.key});
+import '../../themes/theme_const.dart';
+import 'explainHowSemesterView.dart';
+
+class MiddleSemesterCalculator extends StatelessWidget {
+  const MiddleSemesterCalculator({super.key});
 
   @override
   Widget build(BuildContext context) {
-    SemesterCourseProvider provider = context.watch<SemesterCourseProvider>();
+    MiddleSchoolSemesterCourseProvider provider =
+        context.watch<MiddleSchoolSemesterCourseProvider>();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Semester Courses"),
@@ -28,7 +30,7 @@ class SemesterCalculator extends StatelessWidget {
                   Navigator.of(context).push(PageRouteBuilder(
                     opaque: false,
                     pageBuilder: (BuildContext context, _, __) =>
-                        const ExplainHowSemesterView(),
+                        const MiddleSchoolExplainHowSemesterView(),
                   ));
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -36,6 +38,7 @@ class SemesterCalculator extends StatelessWidget {
               },
               icon: const Icon(Icons.question_mark_rounded))
         ],
+        backgroundColor: secondaryColor,
       ),
       drawer: sideDrawer(context),
       drawerEdgeDragWidth: MediaQuery.of(context).size.width,
@@ -60,7 +63,9 @@ class SemesterCalculator extends StatelessWidget {
                     ),
                     Text(
                       //Fetches the calculated letter grade
-                      context.watch<SemesterCourseProvider>().letterGrade,
+                      context
+                          .watch<MiddleSchoolSemesterCourseProvider>()
+                          .letterGrade,
                       style: const TextStyle(
                           fontSize: 60,
                           fontFamily: "SF Pro Text",
@@ -92,8 +97,10 @@ class SemesterCalculator extends StatelessWidget {
           greyLineBreak(),
           ListView.builder(
             shrinkWrap: true,
-            itemCount:
-                context.watch<SemesterCourseProvider>().semesterValues.length,
+            itemCount: context
+                .watch<MiddleSchoolSemesterCourseProvider>()
+                .semesterValues
+                .length,
             itemBuilder: (context, index) {
               return Column(
                 children: [
@@ -135,11 +142,12 @@ class SemesterCalculator extends StatelessWidget {
                                   );
                                 }).toList(),
                                 value: context
-                                    .watch<SemesterCourseProvider>()
+                                    .watch<MiddleSchoolSemesterCourseProvider>()
                                     .semesterValues[index],
                                 onChanged: (String? value) {
                                   return context
-                                      .read<SemesterCourseProvider>()
+                                      .read<
+                                          MiddleSchoolSemesterCourseProvider>()
                                       .ChangeGrade(index, value);
                                 },
                                 style: const TextStyle(
@@ -169,7 +177,9 @@ class SemesterCalculator extends StatelessWidget {
                   backgroundColor: const Color(0xFFADADAD),
                 ),
                 onPressed: () {
-                  context.read<SemesterCourseProvider>().resetGrade();
+                  context
+                      .read<MiddleSchoolSemesterCourseProvider>()
+                      .resetGrade();
                 },
                 child: const Text(
                   "Reset",
@@ -187,10 +197,12 @@ class SemesterCalculator extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.42,
               child: TextButton(
                 style: TextButton.styleFrom(
-                  backgroundColor: mainColor,
+                  backgroundColor: secondaryColor,
                 ),
                 onPressed: () {
-                  context.read<SemesterCourseProvider>().CalculateGrade();
+                  context
+                      .read<MiddleSchoolSemesterCourseProvider>()
+                      .CalculateGrade();
                 },
                 child: const Text(
                   "Calculate",

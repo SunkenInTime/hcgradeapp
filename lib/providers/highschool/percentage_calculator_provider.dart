@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../constants/const.dart';
+import '../../constants/const.dart';
 
 class PercentageProvider with ChangeNotifier {
   String _percentageValue = "100%";
@@ -17,5 +17,6 @@ class PercentageProvider with ChangeNotifier {
     percentAndLetter[1] = calculateLetterWithPercent(percentage);
     _letterGrade = percentAndLetter[1];
     _percentageValue = percentAndLetter[0];
+    notifyListeners();
   }
 }

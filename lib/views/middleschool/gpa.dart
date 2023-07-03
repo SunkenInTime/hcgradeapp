@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:hcgradeapp/providers/gpa_calculator_provider.dart';
-import 'package:hcgradeapp/views/explainHowGPAView.dart';
+import 'package:hcgradeapp/providers/highschool/gpa_calculator_provider.dart';
+import 'package:hcgradeapp/views/highschool/explainHowGPAView.dart';
 import 'package:provider/provider.dart';
 
-import '../constants/const.dart';
-import '../constants/icons.dart';
-import '../themes/theme_const.dart';
+import '../../constants/const.dart';
+import '../../constants/icons.dart';
+import '../../themes/theme_const.dart';
 
-class GPACalculator extends StatefulWidget {
-  const GPACalculator({super.key});
+class MiddleGPACalculator extends StatefulWidget {
+  const MiddleGPACalculator({super.key});
 
   @override
-  State<GPACalculator> createState() => _GPACalculatorState();
+  State<MiddleGPACalculator> createState() => _MiddleGPACalculatorState();
 }
 
-class _GPACalculatorState extends State<GPACalculator> {
+class _MiddleGPACalculatorState extends State<MiddleGPACalculator> {
   @override
   void dispose() {
     GpaProvider().dispose();
@@ -53,6 +53,7 @@ class _GPACalculatorState extends State<GPACalculator> {
             },
           ),
         ],
+        backgroundColor: secondaryColor,
       ),
       drawer: sideDrawer(context),
       drawerEdgeDragWidth: MediaQuery.of(context).size.width,
@@ -139,7 +140,7 @@ Widget editAndViewMode(BuildContext context) {
                       width: 169,
                       child: TextButton.icon(
                         style: TextButton.styleFrom(
-                          backgroundColor: mainColor,
+                          backgroundColor: secondaryColor,
                         ),
                         onPressed: () {
                           context.read<GpaProvider>().addCourse();
@@ -351,7 +352,7 @@ Widget editAndViewMode(BuildContext context) {
                 width: MediaQuery.of(context).size.width * 0.42,
                 child: TextButton(
                   style: TextButton.styleFrom(
-                    backgroundColor: mainColor,
+                    backgroundColor: secondaryColor,
                   ),
                   onPressed: () {
                     context.read<GpaProvider>().calculateGPA();
@@ -613,7 +614,7 @@ Widget editAndViewMode(BuildContext context) {
                 width: MediaQuery.of(context).size.width * 0.42,
                 child: TextButton(
                   style: TextButton.styleFrom(
-                    backgroundColor: mainColor,
+                    backgroundColor: secondaryColor,
                   ),
                   onPressed: () {
                     context.read<GpaProvider>().calculateGPA();

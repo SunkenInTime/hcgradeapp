@@ -1,26 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:hcgradeapp/providers/semester_course_calculator_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-import '../constants/const.dart';
-import '../themes/theme_const.dart';
+import '../../constants/const.dart';
+import '../../providers/middleschool/semester_course_calculator_provider.dart';
+import '../../themes/theme_const.dart';
 
-class ExplainHowSemesterView extends StatelessWidget {
-  const ExplainHowSemesterView({super.key});
+class MiddleSchoolExplainHowSemesterView extends StatelessWidget {
+  const MiddleSchoolExplainHowSemesterView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    SemesterCourseProvider provider = context.watch<SemesterCourseProvider>();
+    MiddleSchoolSemesterCourseProvider provider =
+        context.watch<MiddleSchoolSemesterCourseProvider>();
     List<String?> semesterValues = provider.semesterValues;
     int quarter1 = letterToNum(semesterValues[0]!);
     int quarter2 = letterToNum(semesterValues[1]!);
-    int midterm = letterToNum(semesterValues[2]!);
-    int multipliedQuarter1 = letterToNum(semesterValues[0]!) * 2;
-    int multipliedQuarter2 = letterToNum(semesterValues[1]!) * 2;
-    int multipliedMidterm = letterToNum(semesterValues[2]!) * 1;
-    int addedGrades =
-        multipliedQuarter1 + multipliedMidterm + multipliedQuarter2;
-    double dividedGrades = addedGrades / 5;
+
+    int addedGrades = quarter1 + quarter2;
+    double dividedGrades = addedGrades / 2;
     return Scaffold(
       backgroundColor: Colors.white.withOpacity(0.85),
       body: Center(
@@ -28,16 +25,15 @@ class ExplainHowSemesterView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Quarter 1 = ${provider.semesterValues[0]} = $quarter1 * 2 = ${quarter1 * 2}\n'
-              'Quarter 2 = ${provider.semesterValues[1]} = $quarter2 * 2 = ${quarter2 * 2}\n'
-              'Midterm = ${provider.semesterValues[2]} = $midterm * 1 = ${midterm * 1}\n',
+              'Quarter 1 = ${provider.semesterValues[0]} = $quarter1 \n'
+              'Quarter 2 = ${provider.semesterValues[1]} = $quarter2 \n',
               textAlign: TextAlign.center,
               style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 8.0, bottom: 2.0),
               child: Text(
-                '$multipliedQuarter1 + $multipliedQuarter2 + $midterm = $addedGrades / 5 = $dividedGrades\n'
+                '$quarter1 + $quarter2 = $addedGrades / 2 = $dividedGrades\n'
                 '$dividedGrades = ${provider.letterGrade}\n',
                 textAlign: TextAlign.center,
                 style:
@@ -51,7 +47,7 @@ class ExplainHowSemesterView extends StatelessWidget {
             const SizedBox(height: 15),
             TextButton(
               style: TextButton.styleFrom(
-                backgroundColor: mainColor,
+                backgroundColor: secondaryColor,
               ),
               onPressed: () {
                 Navigator.pop(context);
@@ -75,6 +71,7 @@ class ExplainHowSemesterView extends StatelessWidget {
                 },
                 child: const Text(
                   "HCPSS Policy 8020",
+                  style: TextStyle(color: secondaryColor),
                 ))
           ],
         ),

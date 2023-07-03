@@ -1,42 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-import '../constants/const.dart';
-import '../providers/full_course_calculator_provider.dart';
-import '../themes/theme_const.dart';
+import '../../constants/const.dart';
+import '../../providers/middleschool/full_course_calculator_provider.dart';
+import '../../themes/theme_const.dart';
 
-class ExplainHowFullYearView extends StatefulWidget {
-  const ExplainHowFullYearView({super.key});
+class MiddleSchoolExplainHowFullYearView extends StatefulWidget {
+  const MiddleSchoolExplainHowFullYearView({super.key});
 
   @override
-  State<ExplainHowFullYearView> createState() => _ExplainHowFullYearViewState();
+  State<MiddleSchoolExplainHowFullYearView> createState() =>
+      _MiddleSchoolExplainHowFullYearViewState();
 }
 
-class _ExplainHowFullYearViewState extends State<ExplainHowFullYearView> {
+class _MiddleSchoolExplainHowFullYearViewState
+    extends State<MiddleSchoolExplainHowFullYearView> {
   @override
   Widget build(BuildContext context) {
-    CourseCalculatorProvider provider =
-        context.watch<CourseCalculatorProvider>();
+    MiddleSchoolCourseCalculatorProvider provider =
+        context.watch<MiddleSchoolCourseCalculatorProvider>();
     List<String?> quarterValues = provider.quarterValues;
     int quarter1 = letterToNum(quarterValues[0]!);
     int quarter2 = letterToNum(quarterValues[1]!);
     int quarter3 = letterToNum(quarterValues[2]!);
     int quarter4 = letterToNum(quarterValues[3]!);
-    int midterm = letterToNum(quarterValues[4]!);
-    int finals = letterToNum(quarterValues[5]!);
-    int multipliedQuarter1 = letterToNum(quarterValues[0]!) * 2;
-    int multipliedQuarter2 = letterToNum(quarterValues[1]!) * 2;
-    int multipliedQuarter3 = letterToNum(quarterValues[2]!) * 2;
-    int multipliedQuarter4 = letterToNum(quarterValues[3]!) * 2;
-    int multipliedMidterm = letterToNum(quarterValues[4]!) * 1;
-    int multipledFinals = letterToNum(quarterValues[5]!) * 1;
-    int addedGrades = multipliedQuarter1 +
-        multipliedQuarter2 +
-        multipliedQuarter3 +
-        multipliedQuarter4 +
-        multipliedMidterm +
-        multipledFinals;
-    double dividedGrades = addedGrades / 10;
+
+    int addedGrades = quarter1 + quarter2 + quarter3 + quarter4;
+
+    double dividedGrades = addedGrades / 4;
     return Scaffold(
       backgroundColor: Colors.white.withOpacity(0.85),
       // appBar: AppBar(
@@ -53,19 +44,17 @@ class _ExplainHowFullYearViewState extends State<ExplainHowFullYearView> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Quarter 1 = ${provider.quarterValues[0]} = $quarter1 * 2 = ${quarter1 * 2}\n'
-              'Quarter 2 = ${provider.quarterValues[1]} = $quarter2 * 2 = ${quarter2 * 2}\n'
-              'Quarter 3 = ${provider.quarterValues[2]} = $quarter3 * 2 = ${quarter3 * 2}\n'
-              'Quarter 4 = ${provider.quarterValues[3]} = $quarter4 * 2 = ${quarter4 * 2}\n'
-              'Midterm = ${provider.quarterValues[4]} = $midterm * 1 = ${midterm * 1}\n'
-              'Final = ${provider.quarterValues[5]} = $finals * 1 = ${finals * 1}\n',
+              'Quarter 1 = ${provider.quarterValues[0]} = $quarter1 \n'
+              'Quarter 2 = ${provider.quarterValues[1]} = $quarter2 \n'
+              'Quarter 3 = ${provider.quarterValues[2]} = $quarter3 \n'
+              'Quarter 4 = ${provider.quarterValues[3]} = $quarter4 \n',
               textAlign: TextAlign.center,
               style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 8.0, bottom: 2.0),
               child: Text(
-                '$multipliedQuarter1 + $multipliedQuarter2 + $multipliedQuarter3 + $multipliedQuarter4 + $midterm + $finals = $addedGrades / 10 = $dividedGrades\n'
+                '$quarter1 + $quarter2 + $quarter3 + $quarter4 = $addedGrades / 4 = $dividedGrades\n'
                 '$dividedGrades = ${provider.letterGrade}\n',
                 textAlign: TextAlign.center,
                 style:
@@ -79,7 +68,7 @@ class _ExplainHowFullYearViewState extends State<ExplainHowFullYearView> {
             const SizedBox(height: 15),
             TextButton(
               style: TextButton.styleFrom(
-                backgroundColor: mainColor,
+                backgroundColor: secondaryColor,
               ),
               onPressed: () {
                 Navigator.pop(context);
@@ -103,6 +92,7 @@ class _ExplainHowFullYearViewState extends State<ExplainHowFullYearView> {
                 },
                 child: const Text(
                   "HCPSS Policy 8020",
+                  style: TextStyle(color: secondaryColor),
                 ))
           ],
         ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../constants/const.dart';
+import '../../constants/const.dart';
 
 class GpaProvider with ChangeNotifier {
   bool editMode = false;
