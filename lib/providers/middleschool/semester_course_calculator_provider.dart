@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../constants/const.dart';
+import '../../constants/const.dart';
 
-class SemesterCourseProvider with ChangeNotifier {
-  List<String?> _semesterValues = ["A", "A", "A"];
+class MiddleSchoolSemesterCourseProvider with ChangeNotifier {
+  List<String?> _semesterValues = ["A", "A"];
   String _letterGrade = "A";
   bool isCalculated = true;
 
@@ -11,18 +11,17 @@ class SemesterCourseProvider with ChangeNotifier {
   String get letterGrade => _letterGrade;
 
   void CalculateGrade() {
-    int quater1 = letterToNum(semesterValues[0]!) * 2;
-    int quater2 = letterToNum(semesterValues[1]!) * 2;
-    int midterm = letterToNum(semesterValues[2]!) * 1;
-    int calc = quater1 + quater2 + midterm;
-    double ans = calc / 5;
+    int quater1 = letterToNum(semesterValues[0]!);
+    int quater2 = letterToNum(semesterValues[1]!);
+    int calc = quater1 + quater2;
+    double ans = calc / 2;
     _letterGrade = numToLetter(ans);
     isCalculated = true;
     notifyListeners();
   }
 
   void resetGrade() {
-    _semesterValues = ["A", "A", "A"];
+    _semesterValues = ["A", "A"];
     CalculateGrade();
   }
 

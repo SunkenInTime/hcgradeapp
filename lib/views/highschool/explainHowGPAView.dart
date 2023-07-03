@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hcgradeapp/constants/const.dart';
-import 'package:hcgradeapp/providers/gpa_calculator_provider.dart';
+import 'package:hcgradeapp/providers/highschool/gpa_calculator_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
+import '../../providers/highschool/school_level_provider.dart';
 import '../../themes/theme_const.dart';
 
 class ExplainHowGPAView extends StatefulWidget {
@@ -65,7 +66,10 @@ class _ExplainHowGPAViewState extends State<ExplainHowGPAView> {
             const SizedBox(height: 15),
             TextButton(
               style: TextButton.styleFrom(
-                backgroundColor: mainColor,
+                backgroundColor:
+                    context.watch<SchoolLevelProvider>().schoolLevel == "middle"
+                        ? secondaryColor
+                        : mainColor,
               ),
               onPressed: () {
                 Navigator.pop(context);
@@ -87,8 +91,14 @@ class _ExplainHowGPAViewState extends State<ExplainHowGPAView> {
                     mode: LaunchMode.externalApplication,
                   );
                 },
-                child: const Text(
+                child: Text(
                   "HCPSS Policy 8020",
+                  style: TextStyle(
+                    color: context.watch<SchoolLevelProvider>().schoolLevel ==
+                            "middle"
+                        ? secondaryColor
+                        : mainColor,
+                  ),
                 ))
           ],
         ),

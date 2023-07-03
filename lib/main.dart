@@ -3,10 +3,12 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:hcgradeapp/constants/icons.dart';
 import 'package:hcgradeapp/constants/routes.dart';
-import 'package:hcgradeapp/providers/full_course_calculator_provider.dart';
-import 'package:hcgradeapp/providers/gpa_calculator_provider.dart';
-import 'package:hcgradeapp/providers/school_level_provider.dart';
-import 'package:hcgradeapp/providers/semester_course_calculator_provider.dart';
+import 'package:hcgradeapp/providers/highschool/full_course_calculator_provider.dart';
+import 'package:hcgradeapp/providers/highschool/gpa_calculator_provider.dart';
+import 'package:hcgradeapp/providers/highschool/school_level_provider.dart';
+import 'package:hcgradeapp/providers/highschool/semester_course_calculator_provider.dart';
+import 'package:hcgradeapp/providers/middleschool/full_course_calculator_provider.dart';
+import 'package:hcgradeapp/providers/middleschool/semester_course_calculator_provider.dart';
 import 'package:hcgradeapp/themes/theme_const.dart';
 import 'package:hcgradeapp/views/highschool/fullyear.dart';
 import 'package:hcgradeapp/views/highschool/gpa.dart';
@@ -31,7 +33,11 @@ void main() async {
       ChangeNotifierProvider(create: (_) => CourseCalculatorProvider()),
       ChangeNotifierProvider(create: (_) => SemesterCourseProvider()),
       ChangeNotifierProvider(create: (_) => GpaProvider()),
-      ChangeNotifierProvider(create: (_) => SchoolLevelProvider())
+      ChangeNotifierProvider(create: (_) => SchoolLevelProvider()),
+      ChangeNotifierProvider(
+          create: (_) => MiddleSchoolCourseCalculatorProvider()),
+      ChangeNotifierProvider(
+          create: (_) => MiddleSchoolSemesterCourseProvider()),
     ],
     child: const MyApp(),
   ));

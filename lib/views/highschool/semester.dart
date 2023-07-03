@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../constants/const.dart';
 import '../../constants/icons.dart';
-import '../../providers/semester_course_calculator_provider.dart';
+import '../../providers/highschool/semester_course_calculator_provider.dart';
 import '../../themes/theme_const.dart';
 
 class SemesterCalculator extends StatelessWidget {

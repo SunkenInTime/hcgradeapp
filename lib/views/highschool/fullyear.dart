@@ -4,7 +4,7 @@ import 'package:hcgradeapp/themes/theme_const.dart';
 import 'package:hcgradeapp/views/highschool/explainHowFullYearView.dart';
 import 'package:provider/provider.dart';
 import '../../constants/const.dart';
-import '../../providers/full_course_calculator_provider.dart';
+import '../../providers/highschool/full_course_calculator_provider.dart';
 
 class FullYearCourseCalculator extends StatelessWidget {
   const FullYearCourseCalculator({super.key});

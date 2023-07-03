@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hcgradeapp/providers/gpa_calculator_provider.dart';
+import 'package:hcgradeapp/providers/highschool/gpa_calculator_provider.dart';
 import 'package:hcgradeapp/views/highschool/explainHowGPAView.dart';
 import 'package:provider/provider.dart';
 

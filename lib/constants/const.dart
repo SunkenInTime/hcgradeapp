@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hcgradeapp/providers/school_level_provider.dart';
+import 'package:hcgradeapp/providers/highschool/school_level_provider.dart';
 import 'package:hcgradeapp/themes/theme_const.dart';
 import 'package:flutter_donation_buttons/flutter_donation_buttons.dart';
 import 'package:provider/provider.dart';
@@ -77,8 +77,7 @@ Widget sideDrawer(BuildContext context) {
         context.watch<SchoolLevelProvider>().schoolLevel == "middle"
             ? secondaryColor
             : mainColor,
-    child: ListView(
-      padding: EdgeInsets.zero,
+    child: Column(
       children: [
         const SizedBox(
           height: 120,
@@ -133,8 +132,8 @@ Widget sideDrawer(BuildContext context) {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: SizedBox(
-              width: 20,
-              height: 42,
+              width: 270,
+              height: 43,
               child: ElevatedButton(
                   onPressed: () {
                     launchUrlString(
@@ -148,9 +147,13 @@ Widget sideDrawer(BuildContext context) {
         const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 15),
-          child: BuyMeACoffeeButton(
-            buyMeACoffeeName: "sunkenintime",
-            color: BuyMeACoffeeColor.Violet,
+          child: SizedBox(
+            width: 270,
+            height: 42,
+            child: BuyMeACoffeeButton(
+              buyMeACoffeeName: "sunkenintime",
+              color: BuyMeACoffeeColor.Violet,
+            ),
           ),
         ),
         const Text(
