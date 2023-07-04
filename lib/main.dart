@@ -17,11 +17,17 @@ import 'package:hcgradeapp/views/highschool/semester.dart';
 import 'package:hcgradeapp/views/middleschool/fullyear.dart';
 import 'package:hcgradeapp/views/middleschool/gpa.dart';
 import 'package:hcgradeapp/views/middleschool/semester.dart';
+import 'package:hive_flutter/adapters.dart';
 
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:provider/provider.dart';
 
+import 'constants/const.dart';
+
 void main() async {
+  await Hive.initFlutter();
+  await Hive.openBox<Course>("courseBox");
+
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => CourseCalculatorProvider()),
@@ -65,7 +71,6 @@ class BottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     PersistentTabController controller;
     controller = PersistentTabController(initialIndex: 0);
-    // ignore: no_leading_underscores_for_local_identifiers
     List<Widget> _highSchoolBuildScreens() {
       return [
         const FullYearCourseCalculator(),
@@ -75,7 +80,6 @@ class BottomNavBar extends StatelessWidget {
       ];
     }
 
-    // ignore: no_leading_underscores_for_local_identifiers
     List<Widget> _middleSchoolBuildScreens() {
       return [
         const MiddleFullYearCourseCalculator(),
@@ -85,7 +89,6 @@ class BottomNavBar extends StatelessWidget {
       ];
     }
 
-    // ignore: no_leading_underscores_for_local_identifiers
     List<PersistentBottomNavBarItem> _highSchoolNavBarsItems() {
       return [
         PersistentBottomNavBarItem(
@@ -115,7 +118,6 @@ class BottomNavBar extends StatelessWidget {
       ];
     }
 
-    // ignore: no_leading_underscores_for_local_identifiers
     List<PersistentBottomNavBarItem> _middleSchoolNavBarsItems() {
       return [
         PersistentBottomNavBarItem(

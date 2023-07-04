@@ -12,12 +12,11 @@ class CourseCalculatorProvider with ChangeNotifier {
 
   void resetGrade() {
     _quarterValues = ["A", "A", "A", "A", "A", "A"];
-    calculateGrade();
+    CalculateGrade();
     notifyListeners();
   }
 
-  // ignore: non_constant_identifier_names
-  void calculateGrade() {
+  void CalculateGrade() {
     int quarter1 = letterToNum(_quarterValues[0]!) * 2;
     int quarter2 = letterToNum(_quarterValues[1]!) * 2;
     int quarter3 = letterToNum(_quarterValues[2]!) * 2;
@@ -41,7 +40,7 @@ class CourseCalculatorProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void changeGrade(int index, String? value) {
+  void ChangeGrade(int index, String? value) {
     _quarterValues[index] = value;
     isCalculated = false;
     // CalculateGrade();

@@ -145,7 +145,7 @@ class FullYearCourseCalculator extends StatelessWidget {
                                 onChanged: (String? value) {
                                   return context
                                       .read<CourseCalculatorProvider>()
-                                      .changeGrade(index, value);
+                                      .ChangeGrade(index, value);
                                 },
                                 style: const TextStyle(
                                   fontSize: 16,
@@ -195,7 +195,7 @@ class FullYearCourseCalculator extends StatelessWidget {
                   backgroundColor: mainColor,
                 ),
                 onPressed: () {
-                  context.read<CourseCalculatorProvider>().calculateGrade();
+                  context.read<CourseCalculatorProvider>().CalculateGrade();
                 },
                 child: const Text(
                   "Calculate",
