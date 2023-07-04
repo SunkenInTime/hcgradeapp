@@ -3,6 +3,7 @@ import 'package:hcgradeapp/providers/highschool/school_level_provider.dart';
 import 'package:hcgradeapp/themes/theme_const.dart';
 import 'package:flutter_donation_buttons/flutter_donation_buttons.dart';
 import 'package:provider/provider.dart';
+// ignore: depend_on_referenced_packages
 import 'package:url_launcher/url_launcher_string.dart';
 import 'icons.dart';
 
@@ -191,9 +192,6 @@ String calculateLetterWithPercent(double percent) {
 }
 
 bool isNumber(String str) {
-  if (str == null) {
-    return false;
-  }
   return double.tryParse(str) != null;
 }
 

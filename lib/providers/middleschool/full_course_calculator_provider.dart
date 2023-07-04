@@ -12,11 +12,11 @@ class MiddleSchoolCourseCalculatorProvider with ChangeNotifier {
 
   void resetGrade() {
     _quarterValues = ["A", "A", "A", "A"];
-    CalculateGrade();
+    calculateGrade();
     notifyListeners();
   }
 
-  void CalculateGrade() {
+  void calculateGrade() {
     int quarter1 = letterToNum(_quarterValues[0]!);
     int quarter2 = letterToNum(_quarterValues[1]!);
     int quarter3 = letterToNum(_quarterValues[2]!);
@@ -39,7 +39,7 @@ class MiddleSchoolCourseCalculatorProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void ChangeGrade(int index, String? value) {
+  void changeGrade(int index, String? value) {
     _quarterValues[index] = value;
     isCalculated = false;
     // CalculateGrade();
