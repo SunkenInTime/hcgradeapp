@@ -109,7 +109,7 @@ Widget sideDrawer(BuildContext context) {
         const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
         ListTile(
           title: const Text(
-            "Highschool",
+            "High School",
             style: TextStyle(
               color: Colors.white,
             ),
@@ -132,17 +132,21 @@ Widget sideDrawer(BuildContext context) {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: SizedBox(
-              width: 270,
-              height: 43,
-              child: ElevatedButton(
-                  onPressed: () {
-                    launchUrlString(
-                        "https://me.daracloud.uk/privacy-policies/grade-aid-privacy-policy/",
-                        mode: LaunchMode.externalApplication);
-                  },
-                  style:
-                      ElevatedButton.styleFrom(backgroundColor: Colors.black),
-                  child: const Text("Privacy Policy"))),
+            width: 270,
+            height: 43,
+            child: ElevatedButton(
+              onPressed: () {
+                launchUrlString(
+                    "https://sunkenintime.github.io/privacy-policies/grade-aid-privacy-policy/",
+                    mode: LaunchMode.externalApplication);
+              },
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
+              child: const Text(
+                "Privacy Policy",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ),
         ),
         const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
         const Padding(
@@ -191,9 +195,6 @@ String calculateLetterWithPercent(double percent) {
 }
 
 bool isNumber(String str) {
-  if (str == null) {
-    return false;
-  }
   return double.tryParse(str) != null;
 }
 
@@ -254,6 +255,7 @@ Widget drawerIcon() {
     builder: (context) => IconButton(
       onPressed: () => Scaffold.of(context).openDrawer(),
       icon: const Icon(CustomIcons.menusquare),
+      color: Colors.white,
     ),
   );
 }

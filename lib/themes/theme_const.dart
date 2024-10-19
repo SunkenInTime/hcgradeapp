@@ -9,6 +9,10 @@ ThemeData highschoolThemeData = ThemeData(
     primary: mainColor,
     secondary: Colors.white,
   ),
+  appBarTheme: AppBarTheme(backgroundColor: mainColor,
+   titleTextStyle: TextStyle(fontFamily: "SF-Pro-Text", fontWeight: FontWeight.bold, fontSize: 16)
+  ),
+  iconButtonTheme: IconButtonThemeData(style: ButtonStyle(iconColor: WidgetStatePropertyAll(Colors.white)))
   // buttonTheme: const ButtonThemeData(
   //   textTheme: ButtonTextTheme.primary,
   //   buttonColor: mainColor,
