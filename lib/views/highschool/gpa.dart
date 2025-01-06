@@ -303,7 +303,10 @@ Widget editAndViewMode(BuildContext context) {
                                         .read<GpaProvider>()
                                         .removeCourse(index);
                                   },
-                                  icon: const Icon(CustomIcons.weight_regular),
+                                  icon: const Icon(
+                                    CustomIcons.weight_regular,
+                                    color: Colors.red,
+                                  ),
                                   color: Colors.red,
                                 )
                               ],

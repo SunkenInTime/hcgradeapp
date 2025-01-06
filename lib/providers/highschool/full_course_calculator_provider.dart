@@ -12,11 +12,11 @@ class CourseCalculatorProvider with ChangeNotifier {
 
   void resetGrade() {
     _quarterValues = ["A", "A", "A", "A", "A", "A"];
-    CalculateGrade();
+    calculateGrade();
     notifyListeners();
   }
 
-  void CalculateGrade() {
+  void calculateGrade() {
     int quarter1 = letterToNum(_quarterValues[0]!) * 2;
     int quarter2 = letterToNum(_quarterValues[1]!) * 2;
     int quarter3 = letterToNum(_quarterValues[2]!) * 2;

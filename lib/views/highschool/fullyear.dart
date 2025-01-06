@@ -264,7 +264,7 @@ class FullYearCourseCalculator extends StatelessWidget {
                     backgroundColor: mainColor,
                   ),
                   onPressed: () {
-                    context.read<CourseCalculatorProvider>().CalculateGrade();
+                    context.read<CourseCalculatorProvider>().calculateGrade();
                   },
                   child: const Text(
                     "Calculate",
