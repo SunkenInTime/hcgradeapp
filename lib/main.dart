@@ -17,18 +17,11 @@ import 'package:hcgradeapp/views/highschool/semester.dart';
 import 'package:hcgradeapp/views/middleschool/fullyear.dart';
 import 'package:hcgradeapp/views/middleschool/gpa.dart';
 import 'package:hcgradeapp/views/middleschool/semester.dart';
-import 'package:hive_flutter/adapters.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
-
 
 import 'package:provider/provider.dart';
 
-import 'constants/const.dart';
-
 void main() async {
-  await Hive.initFlutter();
-  await Hive.openBox<Course>("courseBox");
-
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => CourseCalculatorProvider()),
@@ -155,30 +148,6 @@ class BottomNavBar extends StatelessWidget {
         controller: controller,
         screens: middleSchoolBuildScreens(),
         items: middleSchoolNavBarsItems(),
-        
-        backgroundColor: Colors.black, // Default is Colors.white.
-        handleAndroidBackButtonPress: true, // Default is true.
-        resizeToAvoidBottomInset:
-            true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
-        stateManagement: true, // Default is true.
-         // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
-        decoration: const NavBarDecoration(
-          // borderRadius: BorderRadius.circular(10.0),
-          colorBehindNavBar: Colors.black,
-        ),
-        
-        navBarStyle:
-            NavBarStyle.style9, // Choose the nav bar style with this property.
-        navBarHeight: 65,
-      );
-    } else {
-      log("Pro highschoolers");
-      return PersistentTabView(
-        context,
-        controller: controller,
-        screens: highSchoolBuildScreens(),
-        items: highSchoolNavBarsItems(),
-        
 
         backgroundColor: Colors.black, // Default is Colors.white.
         handleAndroidBackButtonPress: true, // Default is true.
@@ -190,8 +159,30 @@ class BottomNavBar extends StatelessWidget {
           // borderRadius: BorderRadius.circular(10.0),
           colorBehindNavBar: Colors.black,
         ),
-       
-    
+
+        navBarStyle:
+            NavBarStyle.style9, // Choose the nav bar style with this property.
+        navBarHeight: 65,
+      );
+    } else {
+      log("Pro highschoolers");
+      return PersistentTabView(
+        context,
+        controller: controller,
+        screens: highSchoolBuildScreens(),
+        items: highSchoolNavBarsItems(),
+
+        backgroundColor: Colors.black, // Default is Colors.white.
+        handleAndroidBackButtonPress: true, // Default is true.
+        resizeToAvoidBottomInset:
+            true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
+        stateManagement: true, // Default is true.
+        // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
+        decoration: const NavBarDecoration(
+          // borderRadius: BorderRadius.circular(10.0),
+          colorBehindNavBar: Colors.black,
+        ),
+
         navBarStyle:
             NavBarStyle.style9, // Choose the nav bar style with this property.
         navBarHeight: 65,
