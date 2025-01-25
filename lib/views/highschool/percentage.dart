@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hcgradeapp/constants/const.dart';
-import 'package:hcgradeapp/providers/highschool/school_level_provider.dart';
 import '../../themes/theme_const.dart';
-import 'package:provider/provider.dart';
 
 class PercentageCalculatorView extends StatefulWidget {
   const PercentageCalculatorView({super.key});
@@ -42,10 +40,7 @@ class _PercentageCalculatorViewState extends State<PercentageCalculatorView> {
           leading: drawerIcon(),
           centerTitle: true,
           toolbarHeight: 70,
-          backgroundColor:
-              context.watch<SchoolLevelProvider>().schoolLevel == "middle"
-                  ? secondaryColor
-                  : mainColor,
+          backgroundColor: mainColor,
         ),
         drawer: sideDrawer(context),
         drawerEdgeDragWidth: MediaQuery.of(context).size.width,
@@ -146,11 +141,7 @@ class _PercentageCalculatorViewState extends State<PercentageCalculatorView> {
                     width: MediaQuery.of(context).size.width * 0.42,
                     child: TextButton(
                       style: TextButton.styleFrom(
-                        backgroundColor:
-                            context.watch<SchoolLevelProvider>().schoolLevel ==
-                                    "middle"
-                                ? secondaryColor
-                                : mainColor,
+                        backgroundColor: mainColor,
                       ),
                       onPressed: () {
                         if (_givenScoreValueController.text.isEmpty ||

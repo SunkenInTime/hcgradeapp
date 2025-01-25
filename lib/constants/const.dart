@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hcgradeapp/providers/highschool/school_level_provider.dart';
 import 'package:hcgradeapp/themes/theme_const.dart';
 import 'package:flutter_donation_buttons/flutter_donation_buttons.dart';
-import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'icons.dart';
 
@@ -73,10 +71,7 @@ String numToLetter(double calc) {
 
 Widget sideDrawer(BuildContext context) {
   return Drawer(
-    backgroundColor:
-        context.watch<SchoolLevelProvider>().schoolLevel == "middle"
-            ? secondaryColor
-            : mainColor,
+    backgroundColor: mainColor,
     child: Column(
       children: [
         const SizedBox(
@@ -107,28 +102,6 @@ Widget sideDrawer(BuildContext context) {
           ),
         ),
         const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
-        ListTile(
-          title: const Text(
-            "High School",
-            style: TextStyle(
-              color: Colors.white,
-            ),
-          ),
-          onTap: () {
-            context.read<SchoolLevelProvider>().ChangeLevel("highschool");
-          },
-        ),
-        ListTile(
-          title: const Text(
-            "Middle School",
-            style: TextStyle(
-              color: Colors.white,
-            ),
-          ),
-          onTap: () {
-            context.read<SchoolLevelProvider>().ChangeLevel("middle");
-          },
-        ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: SizedBox(

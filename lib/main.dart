@@ -3,7 +3,6 @@ import 'package:hcgradeapp/constants/icons.dart';
 import 'package:hcgradeapp/constants/routes.dart';
 import 'package:hcgradeapp/providers/highschool/full_course_calculator_provider.dart';
 import 'package:hcgradeapp/providers/highschool/gpa_calculator_provider.dart';
-import 'package:hcgradeapp/providers/highschool/school_level_provider.dart';
 import 'package:hcgradeapp/providers/highschool/semester_course_calculator_provider.dart';
 
 import 'package:hcgradeapp/themes/theme_const.dart';
@@ -22,7 +21,6 @@ void main() async {
       ChangeNotifierProvider(create: (_) => CourseCalculatorProvider()),
       ChangeNotifierProvider(create: (_) => SemesterCourseProvider()),
       ChangeNotifierProvider(create: (_) => GpaProvider()),
-      ChangeNotifierProvider(create: (_) => SchoolLevelProvider()),
     ],
     child: const MyApp(),
   ));

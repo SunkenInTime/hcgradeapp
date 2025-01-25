@@ -169,72 +169,8 @@ class FullYearCourseCalculator extends StatelessWidget {
                   );
                 },
               ),
-
-              // provider.isCalculated
-              //     ? const SizedBox(
-              //         width: 0,
-              //         height: 0,
-              //       )
-              //     : const Text(
-              //         "Changes have not been calculated.",
-              //         style: TextStyle(color: Colors.red),
-              //       ),
             ],
           ),
-          // Expanded(
-          //   child: Align(
-          //     alignment: FractionalOffset.bottomCenter,
-          //     child: Padding(
-          //       padding: const EdgeInsets.symmetric(vertical: 16.0),
-          //       child:
-          //           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          //         SizedBox(
-          //           height: 49,
-          //           width: MediaQuery.of(context).size.width * 0.42,
-          //           child: TextButton(
-          //             style: TextButton.styleFrom(
-          //               backgroundColor: const Color.fromRGBO(173, 173, 173, 1),
-          //             ),
-          //             onPressed: () {
-          //               context.read<CourseCalculatorProvider>().resetGrade();
-          //             },
-          //             child: const Text(
-          //               "Reset",
-          //               style: TextStyle(
-          //                 color: Colors.white,
-          //                 fontSize: 17,
-          //                 fontWeight: FontWeight.w500,
-          //               ),
-          //             ),
-          //           ),
-          //         ),
-          //         const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-          //         SizedBox(
-          //           height: 49,
-          //           width: MediaQuery.of(context).size.width * 0.42,
-          //           child: TextButton(
-          //             style: TextButton.styleFrom(
-          //               backgroundColor: mainColor,
-          //             ),
-          //             onPressed: () {
-          //               context
-          //                   .read<CourseCalculatorProvider>()
-          //                   .CalculateGrade();
-          //             },
-          //             child: const Text(
-          //               "Calculate",
-          //               style: TextStyle(
-          //                 color: Colors.white,
-          //                 fontSize: 17,
-          //                 fontWeight: FontWeight.w500,
-          //               ),
-          //             ),
-          //           ),
-          //         ),
-          //       ]),
-          //     ),
-          //   ),
-          // ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10.0),
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
