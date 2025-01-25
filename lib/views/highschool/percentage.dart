@@ -35,7 +35,10 @@ class _PercentageCalculatorViewState extends State<PercentageCalculatorView> {
       child: Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
-          title: const Text("Percentage Calculator"),
+          title: const Text(
+            "Percentage Calculator",
+            style: TextStyle(color: Colors.white),
+          ),
           leading: drawerIcon(),
           centerTitle: true,
           toolbarHeight: 70,

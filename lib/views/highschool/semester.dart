@@ -17,7 +17,10 @@ class SemesterCalculator extends StatelessWidget {
     SemesterCourseProvider provider = context.watch<SemesterCourseProvider>();
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Semester Courses"),
+        title: const Text(
+          "Semester Courses",
+          style: TextStyle(color: Colors.white),
+        ),
         leading: drawerIcon(),
         centerTitle: true,
         toolbarHeight: 70,

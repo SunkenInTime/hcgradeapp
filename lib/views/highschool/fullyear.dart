@@ -16,7 +16,10 @@ class FullYearCourseCalculator extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Full Year Course"),
+        title: const Text(
+          "Full Year Course",
+          style: TextStyle(color: Colors.white),
+        ),
         leading: drawerIcon(),
         actions: [
           IconButton(
@@ -147,7 +150,7 @@ class FullYearCourseCalculator extends StatelessWidget {
                                     onChanged: (String? value) {
                                       return context
                                           .read<CourseCalculatorProvider>()
-                                          .ChangeGrade(index, value);
+                                          .changeGrade(index, value);
                                     },
                                     style: const TextStyle(
                                       fontSize: 16,

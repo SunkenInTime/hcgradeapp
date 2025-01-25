@@ -40,7 +40,7 @@ class CourseCalculatorProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void ChangeGrade(int index, String? value) {
+  void changeGrade(int index, String? value) {
     _quarterValues[index] = value;
     isCalculated = false;
     // CalculateGrade();

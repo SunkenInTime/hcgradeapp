@@ -26,7 +26,10 @@ class _GPACalculatorState extends State<GPACalculator> {
     GpaProvider provider = context.watch<GpaProvider>();
     return Scaffold(
       appBar: AppBar(
-        title: const Text("GPA Calculator"),
+        title: const Text(
+          "GPA Calculator",
+          style: TextStyle(color: Colors.white),
+        ),
         leading: drawerIcon(),
         centerTitle: true,
         toolbarHeight: 70,
