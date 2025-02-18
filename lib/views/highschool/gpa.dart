@@ -307,7 +307,7 @@ Widget editAndViewMode(BuildContext context) {
                                         .removeCourse(index);
                                   },
                                   icon: const Icon(
-                                    CustomIcons.weight_regular,
+                                    CustomIcons.weightRegular,
                                     color: Colors.red,
                                   ),
                                   color: Colors.red,

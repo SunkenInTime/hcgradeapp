@@ -10,7 +10,7 @@ class SemesterCourseProvider with ChangeNotifier {
   List<String?> get semesterValues => _semesterValues;
   String get letterGrade => _letterGrade;
 
-  void CalculateGrade() {
+  void calculateGrade() {
     int quater1 = letterToNum(semesterValues[0]!) * 2;
     int quater2 = letterToNum(semesterValues[1]!) * 2;
     int midterm = letterToNum(semesterValues[2]!) * 1;
@@ -23,10 +23,10 @@ class SemesterCourseProvider with ChangeNotifier {
 
   void resetGrade() {
     _semesterValues = ["A", "A", "A"];
-    CalculateGrade();
+    calculateGrade();
   }
 
-  void ChangeGrade(int index, String? value) {
+  void changeGrade(int index, String? value) {
     _semesterValues[index] = value;
     isCalculated = false;
     notifyListeners();

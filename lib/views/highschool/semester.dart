@@ -143,7 +143,7 @@ class SemesterCalculator extends StatelessWidget {
                                 onChanged: (String? value) {
                                   return context
                                       .read<SemesterCourseProvider>()
-                                      .ChangeGrade(index, value);
+                                      .changeGrade(index, value);
                                 },
                                 style: const TextStyle(
                                   fontSize: 16,
@@ -193,7 +193,7 @@ class SemesterCalculator extends StatelessWidget {
                   backgroundColor: mainColor,
                 ),
                 onPressed: () {
-                  context.read<SemesterCourseProvider>().CalculateGrade();
+                  context.read<SemesterCourseProvider>().calculateGrade();
                 },
                 child: const Text(
                   "Calculate",

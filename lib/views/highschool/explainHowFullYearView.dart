@@ -37,17 +37,9 @@ class _ExplainHowFullYearViewState extends State<ExplainHowFullYearView> {
         multipliedMidterm +
         multipledFinals;
     double dividedGrades = addedGrades / 10;
+    Colors.white;
     return Scaffold(
-      backgroundColor: Colors.white.withOpacity(0.85),
-      // appBar: AppBar(
-      //   actions: [
-      //     IconButton(
-      //         onPressed: () async {
-      //           Navigator.pop(context);
-      //         },
-      //         icon: const Icon(Icons.close))
-      //   ],
-      // ),
+      backgroundColor: Colors.white.withAlpha(216),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
