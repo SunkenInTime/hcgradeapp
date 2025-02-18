@@ -14,7 +14,7 @@ class EditCourseTile extends StatelessWidget {
       children: [
         Padding(
           padding:
-              const EdgeInsets.only(top: 8.0, left: 14, right: 14, bottom: 10),
+              const EdgeInsets.only(top: 8.0, left: 14, right: 14, bottom: 14),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -119,9 +119,23 @@ class EditCourseTile extends StatelessWidget {
                   ],
                 ),
               ),
+              IconButton(
+                onPressed: () {
+                  context.read<GpaProvider>().removeCourse(index);
+                },
+                icon: const Icon(
+                  CustomIcons.weightRegular,
+                  color: Colors.red,
+                ),
+                color: Colors.red,
+              )
             ],
           ),
         ),
+        if (index + 1 < context.watch<GpaProvider>().courseValues.length)
+          greyLineBreak(),
+
+        // greyLineBreak(),
       ],
     );
   }

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hcgradeapp/providers/highschool/semester_course_calculator_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-import '../../constants/const.dart';
-import '../../themes/theme_const.dart';
+import '../../../constants/const.dart';
+import '../../../themes/theme_const.dart';
 
 class ExplainHowSemesterView extends StatelessWidget {
   const ExplainHowSemesterView({super.key});
@@ -22,7 +22,7 @@ class ExplainHowSemesterView extends StatelessWidget {
         multipliedQuarter1 + multipliedMidterm + multipliedQuarter2;
     double dividedGrades = addedGrades / 5;
     return Scaffold(
-      backgroundColor: Colors.white.withOpacity(0.85),
+      backgroundColor: Colors.white.withAlpha(216),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

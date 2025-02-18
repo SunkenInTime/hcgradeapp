@@ -4,7 +4,7 @@ import 'package:hcgradeapp/providers/highschool/gpa_calculator_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-import '../../themes/theme_const.dart';
+import '../../../themes/theme_const.dart';
 
 class ExplainHowGPAView extends StatefulWidget {
   const ExplainHowGPAView({super.key});
@@ -49,7 +49,7 @@ class _ExplainHowGPAViewState extends State<ExplainHowGPAView> {
     }
 
     return Scaffold(
-      backgroundColor: Colors.white.withOpacity(0.90),
+      backgroundColor: Colors.white.withAlpha(216),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

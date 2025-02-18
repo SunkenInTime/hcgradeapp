@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hcgradeapp/providers/highschool/gpa_calculator_provider.dart';
-import 'package:hcgradeapp/views/highschool/explainHowGPAView.dart';
+import 'package:hcgradeapp/views/highschool/explain_view/explain_gpa.dart';
 import 'package:hcgradeapp/views/highschool/widgets/calculate_and_reset.dart';
-import 'package:hcgradeapp/views/highschool/widgets/course_tile.dart';
 import 'package:hcgradeapp/views/highschool/widgets/edit_course_tile.dart';
+import 'package:hcgradeapp/views/highschool/widgets/course_tile.dart';
 import 'package:hcgradeapp/views/highschool/widgets/grade_info_bar.dart';
 import 'package:provider/provider.dart';
 
@@ -133,9 +133,9 @@ class _GPACalculatorState extends State<GPACalculator> {
                             context.watch<GpaProvider>().courseValues[index];
 
                         if (context.watch<GpaProvider>().editMode) {
-                          return CourseTile(index: index, course: course);
-                        } else {
                           return EditCourseTile(index: index, course: course);
+                        } else {
+                          return CourseTile(index: index, course: course);
                         }
                       }),
                 ),
