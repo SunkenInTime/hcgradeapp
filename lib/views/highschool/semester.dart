@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:hcgradeapp/views/highschool/explainHowSemesterView.dart';
+import 'package:hcgradeapp/views/highschool/widgets/calculate_and_reset.dart';
+import 'package:hcgradeapp/views/highschool/widgets/grade_info_bar.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants/const.dart';
@@ -45,52 +47,9 @@ class SemesterCalculator extends StatelessWidget {
       body: Column(
         // mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  children: [
-                    const Text(
-                      "Your grade",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        fontFamily: "SF Pro Text",
-                      ),
-                    ),
-                    Text(
-                      //Fetches the calculated letter grade
-                      context.watch<SemesterCourseProvider>().letterGrade,
-                      style: const TextStyle(
-                          fontSize: 60,
-                          fontFamily: "SF Pro Text",
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    const Text(
-                      "*All grades are calculated\n using HCPSS Policy 8020.",
-                      style: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.5)),
-                    ),
-                    const Padding(padding: EdgeInsets.only(top: 3)),
-                    provider.isCalculated
-                        ? const SizedBox(
-                            width: 0,
-                            height: 0,
-                          )
-                        : const Text(
-                            "Changes have not \n been calculated.",
-                            style: TextStyle(color: Colors.red),
-                          ),
-                  ],
-                ),
-              ],
-            ),
+          GradeInfoBar(
+            gradeValue: context.watch<SemesterCourseProvider>().letterGrade,
+            isCalculated: provider.isCalculated,
           ),
           greyLineBreak(),
           ListView.builder(
@@ -163,58 +122,11 @@ class SemesterCalculator extends StatelessWidget {
             },
           ),
           const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            SizedBox(
-              height: 49,
-              width: MediaQuery.of(context).size.width * 0.42,
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: const Color(0xFFADADAD),
-                ),
-                onPressed: () {
-                  context.read<SemesterCourseProvider>().resetGrade();
-                },
-                child: const Text(
-                  "Reset",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 17,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-            ),
-            const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-            SizedBox(
-              height: 49,
-              width: MediaQuery.of(context).size.width * 0.42,
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: mainColor,
-                ),
-                onPressed: () {
-                  context.read<SemesterCourseProvider>().calculateGrade();
-                },
-                child: const Text(
-                  "Calculate",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 17,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-            ),
-          ]),
-          // provider.isCalculated
-          //     ? const SizedBox(
-          //         width: 0,
-          //         height: 0,
-          //       )
-          //     : const Text(
-          //         "Changes have not been calculated.",
-          //         style: TextStyle(color: Colors.red),
-          //       ),
+          CalculateAndReset(resetOnPressed: () {
+            context.read<SemesterCourseProvider>().resetGrade();
+          }, calculateOnPressed: () {
+            context.read<SemesterCourseProvider>().calculateGrade();
+          }),
         ],
       ),
     );
